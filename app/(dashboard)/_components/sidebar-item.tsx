@@ -16,9 +16,9 @@ export const SidebarItem = ({icon: Icon, label, href}:SidebarItemProps) => {
     const router = useRouter();
 
     const isActive = 
-    (pathname === "/" && href === "/") ||
+    (pathname === "/" && href === "/customer") ||
     pathname === href || 
-    pathname?.startsWith(`${href}/`);
+    pathname?.startsWith(`${href}/merchant`);
 
     const onClick = () => {
         router.push(href)
@@ -30,24 +30,24 @@ export const SidebarItem = ({icon: Icon, label, href}:SidebarItemProps) => {
         onClick={onClick}
         type="button"
         className={cn(
-            "flex items-center gap-x-2 text-slate-500 text-sm font[500] pl-6 transition-all hover:text-slate-600 hover:bg-slate-300/20",
-            isActive && "text-sky-700 bg-sky-200/20 hover:bg-sky-200/20 hover:text-sky-700"
+            "flex h-16 items-center gap-x-2 text-[#a1a1a0] text-sm font[500] pl-6 transition-all hover:text-[#000] hover:bg-[#fef4f5]",
+            isActive && "text-[#5f2d41] font-bold bg-[#fef4f5] hover:bg-[#fffdfd] hover:text-[#5f2d41]"
         )}
         >
 
-        <div className="flex items-center gap-x-2 py-4">
+        <div className="flex items-center gap-x-2 ">
             <Icon 
             size={22}
             className={cn(
-                "text-slate-500",
-                isActive && "text-sky-700"
+                "text-[#a1a1a0]",
+                isActive && "text-[#5f2d41]"
             )}
             />
             {label}
         </div>
         <div
         className={cn(
-            "ml-auto opacity-0 border-2 border-sky-700 h-full transition-all",
+            "ml-auto opacity-0 border-2 border-[#5f2d41] h-full transition-all",
             isActive && "opacity-100"
         )}
         />

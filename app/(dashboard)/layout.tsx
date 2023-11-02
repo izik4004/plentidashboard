@@ -1,6 +1,9 @@
 import { ReactNode } from "react";
 import { Sidebar } from "./_components/sidebar";
 import { Navbar } from "./_components/navbar";
+import './globals.css'
+
+
 
 const DashboardLayout = ({
     children
@@ -8,7 +11,9 @@ const DashboardLayout = ({
     children:ReactNode
 }) => {
     return ( 
-        <div className="h-full">
+        <html lang="en">
+        <body className="body ">
+        <div className="h-full bg-[#fffdfd]">
             <div className="h-[80px] md:pl-56 fixed inset-y-0 w-full z-50">
                 <Navbar/>
             </div>
@@ -20,6 +25,8 @@ const DashboardLayout = ({
             </main>
      
         </div>
+        </body>
+    </html>
      );
 }
  

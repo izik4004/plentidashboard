@@ -4,39 +4,70 @@ import { Layout, Compass, List, BarChart } from "lucide-react"
 import { SidebarItem } from "./sidebar-item";
 import { usePathname } from "next/navigation";
 
-const guestRoutes = [
+const merchantRoutes = [
     {
         icon: Layout,
-        label: "Dashboard",
-        href: "/"
+        label: "Overview",
+        href: "/merchant"
     },
     {
         icon: Compass,
-        label: "Browse",
-        href: "/search"
+        label: "Promotions & Offers",
+        href: "/merchant/promotions"
+    },
+    {
+        icon: Compass,
+        label: "Order history",
+        href: "/merchant/orders"
+    },
+    {
+        icon: Compass,
+        label: "Customers",
+        href: "/merchant/sales"
+    },
+    {
+        icon: Compass,
+        label: "Invoice",
+        href: "/merchant/invoice"
+    },
+    {
+        icon: Compass,
+        label: "Settings",
+        href: "/merchant/settings"
     },
 ];
 
-const teacherRoutes = [
+const customerRoutes = [
     {
         icon: List,
-        label: "Courses",
-        href: "/teacher/courses"
+        label: "Home",
+        href: "/customer"
     },
     {
         icon: BarChart,
-        label: "Analytics",
-        href: "/teacher/analytics"
+        label: "Category",
+        href: "/customer/category"
     },
+    {
+        icon: BarChart,
+        label: "Stores",
+        href: "/customer/stores"
+    },
+    {
+        icon: BarChart,
+        label: "Profile",
+        href: "/customer/profile"
+    },
+    
 ]
 
 
 export const SidebarRoutes = () => {
 const pathname = usePathname();
 
-const isTeacherPage = pathname?.includes("/teacher");
+const isCustomerPage = pathname?.includes("/customer");
 
-const routes = isTeacherPage ? teacherRoutes : guestRoutes
+const routes = isCustomerPage ? customerRoutes : merchantRoutes
 
     return (
         <div className="flex flex-col w-full">
