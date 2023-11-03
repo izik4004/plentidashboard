@@ -34,7 +34,7 @@ const CustomersPage = () => {
                             />
                         ))}
                     </div>
-                    <Table data={data} headers={headers} showAdditionalContent={true}/>
+                    <Table data={data} headers={headers} showAdditionalContent={true} extraTableRow={false}/>
                 </div>
                 <div className="w-1/4 py-6 ">
                     <div className="shadow-lg p-6 flex flex-col">
@@ -61,12 +61,12 @@ const CustomersPage = () => {
                             </div>
                             <div className="flex space-x-4 items-center">
                                 <div className="w-[16px] h-[16px] bg-[#fc99a2] rounded-full"></div>
-                                <h4 className="text-sm">Top Buyer</h4>
+                                <h4 className="text-sm">Regular Buyer</h4>
                                 <span className="font-semibold">30%</span>
                             </div>
                             <div className="flex space-x-4 items-center">
                                 <div className="w-[16px] h-[16px] bg-[#c88efe] rounded-full"></div>
-                                <h4 className="text-sm">Top Buyer</h4>
+                                <h4 className="text-sm">Occassional Buyer</h4>
                                 <span className="font-semibold">30%</span>
                             </div>
                         </div>

@@ -16,22 +16,25 @@ const ProductDetails = () => {
             <div className="flex justify-between py-2">
                 <div className="flex items-center">
 
-                <Link href="/merchant/promotions">
-                <h3 className="text-sm">Promotion & Offer </h3>
-                </Link>
-                <ChevronRight size={18}/>
-                <h3 className="text-sm">Promotion description </h3>
+                    <Link href="/merchant/promotions">
+                        <h3 className="text-sm">Promotion & Offer </h3>
+                    </Link>
+                    <ChevronRight size={18} />
+                    <h3 className="text-sm">Promotion description </h3>
                 </div>
-                
 
-                <Button
-                    type="button"
-                    variant="ghost"
-                    size="lg"
-                    className="bg-black  text-white rounded-lg"
-                >
-                    Add a new offer
-                </Button>
+
+                <Link href="/merchant/promotions/create">
+                    <Button
+                        type="button"
+                        variant="ghost"
+                        size="lg"
+                        className="bg-black  text-white rounded-xl hover:bg-black-100 hover:text-white"
+
+                    >
+                        Add a new offer
+                    </Button>
+                </Link>
             </div>
             <div className="flex space-x-10">
                 {singleOverviewCardItems.map((item, index) => (

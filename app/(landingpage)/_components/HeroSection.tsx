@@ -8,7 +8,8 @@ import Shape2 from './Shape2';
 import { useRouter } from 'next/navigation'
 import { useState } from "react";
 import Toggle from './Toggle';
-
+import { Label } from "@/components/ui/label"
+import { Switch } from "@/components/ui/switch"
 const HeroSection = () => {
 
 
@@ -38,6 +39,11 @@ const HeroSection = () => {
               
                 <div className="flex items-center justify-center w-full mb-12">
                     <Toggle/>
+                    {/* <div className="flex items-center space-x-2">
+                    <Label htmlFor="airplane-mode">Airplane Mode</Label>
+      <Switch id="airplane-mode" />
+      <Label htmlFor="airplane-mode">Airplane Mode</Label>
+    </div> */}
                     {/* <label htmlFor="toggleB" className="flex items-center cursor-pointer">
                         <div className="mr-6  font-semibold">
                             FOR BUYERS

@@ -20,7 +20,7 @@ const OrdersPage = () => {
           
             </div>
             <div>
-                <Table data={data} headers={headers} color={color}/>
+                <Table data={data} headers={headers} color={color} extraTableRow={true}/>
             </div>
         </div>
 

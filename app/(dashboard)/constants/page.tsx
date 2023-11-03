@@ -20,9 +20,9 @@ export const overviewCardItems = [
     percentage: "20",
     color: "red-300",
     amount: "500,000",
-    iconBGColor:"red-500",
+    iconBGColor:"stone-200",
     color2: "red-500",
-    iconColor: ""
+    iconColor: "stone-800"
   },
   {
     icon: BarChart2 ,
@@ -42,9 +42,9 @@ export const overviewCardItems = [
     percentage: "20",
     color: "red-500",
     amount: "500,000",
-    iconBGColor:"purple-50",
+    iconBGColor:"indigo-100",
     color2: "green-500",
-    iconColor: "purple-300"
+    iconColor: "indigo-800"
   },
 ]
 
