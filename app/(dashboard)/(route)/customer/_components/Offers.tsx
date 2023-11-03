@@ -38,7 +38,7 @@ const OfferCard: React.FC<OfferProps> = ({ offer, detailsLink }) => {
   }, [offer.endDate]);
 
   return (
-    <aside className="rounded-md shadow-md md:p-[1rem] p-[0.5rem] md:w-[260px] w-[170px]">
+    <aside className="rounded-md shadow-md md:p-[1rem] p-[0.5rem] md:w-[260px] xl:my-[2rem] xl:w-[360px] w-[170px]">
       <div className="relative">
         <img
           src={offer.img.src}

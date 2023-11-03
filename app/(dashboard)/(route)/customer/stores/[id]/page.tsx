@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import { mall, mallimage } from "@/images/index";
-import Deals from "@/app/Components/Deals";
-import { dealCard } from "@/app/constants/index";
+import { mall, mallimage } from "@/public/customerImages/index";
+import Deals from "../../_components/Deals";
+import { dealCard } from "../../_constants/customerData";
 
 const page = () => {
   return (
@@ -36,7 +36,7 @@ const page = () => {
         {dealCard.map((deal) => {
           return (
             <div className="md:w-[340px] w-full flex-shrink-0">
-              <Deals offer={deal} key={deal.id} detailsLink={`/stores/${deal.id + deal.percentCashback}/offers`} />
+              <Deals offer={deal} key={deal.id} detailsLink={`/customer/stores/${deal.id + deal.percentCashback}/offers`} />
             </div>
           );
         })}
