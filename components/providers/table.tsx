@@ -144,8 +144,9 @@ const Table: React.FC<TableProbs> = ({ data, headers, color, showAdditionalConte
                             {headers && headers.map((header, colIndex) => (
                                 <td key={colIndex}
 
-                                    className={header === 'status' ? `bg-${color}` : "px-5 py-5 border-b border-gray-200 bg-white text-sm"}
+                                    className={ "px-5 py-5 border-b border-gray-200 bg-white text-sm"}
                                 >
+                                    {/* header === 'status' ? `bg-${color}` : */}
                                     {/* <div className="flex items-center">
                                         <div className="ml-3">
                                             <p className="text-gray-900 whitespace-no-wrap "> */}

@@ -37,7 +37,7 @@ const page = () => {
   ];
 
   return (
-    <div>
+    <div className="p-6">
      <div className="max-md:hidden">
      <Breadcrumbs
         separator=">"
