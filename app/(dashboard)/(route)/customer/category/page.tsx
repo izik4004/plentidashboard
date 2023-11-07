@@ -25,6 +25,7 @@ const page = () => {
             <Link href={`/customer/category/${category.text}`} key={category.id}>
               <aside
                 className="rounded-lg p-[1rem] h-[150px] flex items-center justify-center flex-col"
+               
                 style={{ backgroundColor: colors[index % colors.length] }}
               >
                 <img src={category.img.src} alt="" />

@@ -27,9 +27,6 @@ export default function Home() {
           />
         ))}
         
-        {/* <StatWidget /> */}
-        {/* <StatWidget /> */}
-
       </div>
       <div className="border shadow-lg rounded-md my-10 py-2 bg-white">
         <h3 className="p-6 text-base font-semibold">Sales statistics</h3>
@@ -48,7 +45,7 @@ export default function Home() {
             See all
           </button>
         </div>
-        <Table data={data} headers={headers} />
+        <Table data={data} headers={headers} extraTableRow={true}/>
       </div>
 
     </div>

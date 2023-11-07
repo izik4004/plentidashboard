@@ -36,7 +36,7 @@ const page = () => {
         {dealCard.map((deal) => {
           return (
             <div className="md:w-[340px] w-full flex-shrink-0">
-              <Deals offer={deal} key={deal.id} detailsLink={`/customer/stores/${deal.id + deal.percentCashback}/offers`} />
+            <Deals offer={deal} key={deal.id} detailsLink={`/customer/stores/${deal.id + deal.percentCashback}/offers`} />
             </div>
           );
         })}

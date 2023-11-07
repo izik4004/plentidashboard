@@ -1,6 +1,6 @@
 "use client"
 
-import {useState} from 'react'
+import { useState } from 'react'
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
@@ -12,31 +12,32 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-  } from "@/components/ui/dialog"
+} from "@/components/ui/dialog"
 import OrderDetail from './order-details';
 
-  
+
 interface TableProbs {
     headers: string[];
     data: { [key: string]: any }[];
     color: string
     showAdditionalContent: boolean
+    extraTableRow: boolean
 }
-const Table: React.FC<TableProbs> = ({ data, headers, color, showAdditionalContent }) => {
+const Table: React.FC<TableProbs> = ({ data, headers, color, showAdditionalContent, extraTableRow }) => {
     const [selectedRow, setSelectedRow] = useState<number | null>(null);
     const [modelContent, setModalContent] = useState<string | null>(null)
-    const handleRowClick = (index:number) => {
+    const handleRowClick = (index: number) => {
         setSelectedRow(index === selectedRow ? null : index);
     }
 
-    const openModal = (content:string) => {
+    const openModal = (content: string) => {
         setModalContent(content)
     }
 
     const closeModal = () => {
         setModalContent(null)
     }
-   
+
     return (
 
         <div className="inline-block w-full shadow-md rounded-lg overflow-hidden">
@@ -51,19 +52,24 @@ const Table: React.FC<TableProbs> = ({ data, headers, color, showAdditionalConte
                                     {header}
                                 </th>
                             ))}
-                                <th   className="px-5 py-3 border-b-2 bg-[#f6f7f6]  border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
+                            {extraTableRow && (
+                                <th className="px-5 py-3 border-b-2 bg-[#f6f7f6]  border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Actions</th>
+                            )}
+
                         </tr>
+                     
                     </thead>
+                   
                 )}
                 {/* {showAdditionalContent && (
                     <div>
-                        <div className="flex items-center rounded-md  space-x-10">
+                        <div className="flex items-center rounded-md  ">
 
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     <Button className="px-2 space-x-4 hover:bg-white border-0 ">
-                                        <span>Top buyers</span>
-                                        <ChevronDownIcon className="h-4 w-4 text-secondary-foreground" />
+                                        <span className='text-[#81cdff]'>Top buyers</span>
+                                        <ChevronDownIcon className="h-4 w-4 text-secondary-foreground text-[#81cdff]" />
                                     </Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent
@@ -73,21 +79,21 @@ const Table: React.FC<TableProbs> = ({ data, headers, color, showAdditionalConte
                                 >
 
                                     <DropdownMenuSeparator />
-                                    <DropdownMenuItem>
-                                        Future Ideas
+                                    <DropdownMenuItem className='hover:bg-[#fef4f5] cursor-pointer'>
+                                        This month
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem>My Stack</DropdownMenuItem>
-                                    <DropdownMenuItem>Inspiration</DropdownMenuItem>
+                                    <DropdownMenuItem className='hover:bg-[#fef4f5] cursor-pointer'>Last Month</DropdownMenuItem>
+                                    <DropdownMenuItem className='hover:bg-[#fef4f5] cursor-pointer'>Last 3 Month</DropdownMenuItem>
                                     <DropdownMenuSeparator />
 
                                 </DropdownMenuContent>
                             </DropdownMenu>
-
+                          
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     <Button className="px-2 space-x-4 hover:bg-white border-0 ">
-                                        <span>Top buyers</span>
-                                        <ChevronDownIcon className="h-4 w-4 text-secondary-foreground" />
+                                        <span className='text-[#fc99a2]'>Regular buyers</span>
+                                        <ChevronDownIcon className="h-4 w-4 text-secondary-foreground text-[#fc99a2]" />
                                     </Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent
@@ -97,11 +103,34 @@ const Table: React.FC<TableProbs> = ({ data, headers, color, showAdditionalConte
                                 >
 
                                     <DropdownMenuSeparator />
-                                    <DropdownMenuItem>
+                                    <DropdownMenuItem className='hover:bg-[#fef4f5] cursor-pointer'>
+                                        Nestle
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem className='hover:bg-[#fef4f5] cursor-pointer'>My Stack</DropdownMenuItem>
+                                    <DropdownMenuItem className='hover:bg-[#fef4f5] cursor-pointer'>Inspiration</DropdownMenuItem>
+                                    <DropdownMenuSeparator />
+
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <Button className="px-2 space-x-4 hover:bg-white border-0 ">
+                                        <span className='text-[#c88efe]'>Occasional buyers</span>
+                                        <ChevronDownIcon className="h-4 w-4 text-secondary-foreground text-[#c88efe]" />
+                                    </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent
+                                    alignOffset={5}
+                                    className="w-[140px] bg-white ml-8"
+                                    forceMount
+                                >
+
+                                    <DropdownMenuSeparator />
+                                    <DropdownMenuItem className='hover:bg-[#fef4f5] cursor-pointer'>
                                         Future Ideas
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem>My Stack</DropdownMenuItem>
-                                    <DropdownMenuItem>Inspiration</DropdownMenuItem>
+                                    <DropdownMenuItem className='hover:bg-[#fef4f5] cursor-pointer'>My Stack</DropdownMenuItem>
+                                    <DropdownMenuItem className='hover:bg-[#fef4f5] cursor-pointer'>Inspiration</DropdownMenuItem>
                                     <DropdownMenuSeparator />
 
                                 </DropdownMenuContent>
@@ -114,45 +143,35 @@ const Table: React.FC<TableProbs> = ({ data, headers, color, showAdditionalConte
                         <tr key={index}>
                             {headers && headers.map((header, colIndex) => (
                                 <td key={colIndex}
-                             
-                                className={header === 'status' ? `bg-${color}` : "px-5 py-5 border-b border-gray-200 bg-white text-sm"}
+
+                                    className={ "px-5 py-5 border-b border-gray-200 bg-white text-sm"}
                                 >
+                                    {/* header === 'status' ? `bg-${color}` : */}
                                     {/* <div className="flex items-center">
                                         <div className="ml-3">
                                             <p className="text-gray-900 whitespace-no-wrap "> */}
-                                                {row[header]}
-                                            {/* </p>
+                                    {row[header]}
+                                    {/* </p>
                                         </div>
                                     </div> */}
-                                    
-                                  
-                                </td>
-                            
-                            ))}
-                           <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                          
-                          <OrderDetail/>
-                         
 
-                            {/* <span className="action-button underline cursor-pointer" onClick={() => openModal(row.orderID)}>View details</span> */}
-                                
-                            </td>
-                               
-                           
-                          
+
+                                </td>
+
+                            ))}
+                            {extraTableRow && (
+                                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <OrderDetail />
+                                </td>
+                            )}
+
+
                         </tr>
-                    
+
                     ))}
 
                 </tbody>
             </table>
-{modelContent && (
-    <div>
-        <span onClick={closeModal}>&time;</span>
-        hkhkjwljwekle;lekw;l
-        {modelContent}
-    </div>
-)}
         </div>
 
 

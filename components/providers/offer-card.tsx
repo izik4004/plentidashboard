@@ -76,9 +76,9 @@ const OfferCard: React.FC = () => {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-[120px] bg-white p-0 ">
-                    <DropdownMenuItem className="hover:bg-green-500 text-xs">View offer</DropdownMenuItem>
-                    <DropdownMenuItem className="text-xs border-t">Pause</DropdownMenuItem>
-                    <DropdownMenuItem className="text-xs text-red-500 border-t">Delete</DropdownMenuItem>
+                    <DropdownMenuItem className="cursor-pointer hover:bg-[#f0f0f0] text-xs">View offer</DropdownMenuItem>
+                    <DropdownMenuItem className="cursor-pointer hover:bg-[#f0f0f0]  text-xs border-t">Pause</DropdownMenuItem>
+                    <DropdownMenuItem className="cursor-pointer hover:bg-[#f0f0f0]  text-xs text-red-500 border-t">Delete</DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>

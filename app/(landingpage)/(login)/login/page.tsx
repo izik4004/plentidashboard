@@ -23,7 +23,7 @@ const page = () => {
                     <small>Don't have an account? <span>Register</span></small>
 
                     <div className='flex items-center py-6 flex-col'>
-                        <Link href="/customers">
+                        <Link href="/merchant">
                         <Button title='Login'  />
                         </Link>
                       
