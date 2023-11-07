@@ -27,22 +27,22 @@ import {
 const navLinks = [
   {
     name: "Home",
-    link: "/customers",
+    link: "/customer",
     icons: home_icon,
   },
   {
     name: "Category",
-    link: "/category",
+    link: "/customer/category",
     icons: category_icon,
   },
   {
     name: "Stores",
-    link: "/stores",
+    link: "/customer/stores",
     icons: store_icon,
   },
   {
     name: "Profile",
-    link: "/profile",
+    link: "/cusotmer/profile",
     icons: profile_icon,
   },
 ];
