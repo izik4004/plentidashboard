@@ -22,6 +22,10 @@ import {
   deal,
   mall,
   mallimage,
+  mtn,
+  airtel,
+  etisalat,
+  glo,
 } from "@/public/customerImages";
 
 const navLinks = [
@@ -269,8 +273,62 @@ const colors = [
   "#A5FEE3",
 ];
 const choose_brand = [brand1, brand2, brand3, brand1, brand2, brand3];
+const recentTopUp = [
+  {
+    brand: mtn,
+    num: "091282822",
+  },
+  {
+    brand: airtel,
+    num: "091282822",
+  },
+  {
+    brand: etisalat,
+    num: "091282822",
+  },
+  {
+    brand: glo,
+    num: "091282822",
+  },
+];
 
+const brandAmount = [
+  {
+    price: "50",
+    points: "5",
+  },
+  {
+    price: "50",
+    points: "5",
+  },
+  {
+    price: "50",
+    points: "5",
+  },
+  {
+    price: "50",
+    points: "5",
+  },
+  {
+    price: "50",
+    points: "5",
+  },
+  {
+    price: "50",
+    points: "5",
+  },
+  {
+    price: "50",
+    points: "5",
+  },
+  {
+    price: "50",
+    points: "5",
+  },
+];
 export {
+  brandAmount,
+  recentTopUp,
   navLinks,
   offerCard,
   pointOptions,
