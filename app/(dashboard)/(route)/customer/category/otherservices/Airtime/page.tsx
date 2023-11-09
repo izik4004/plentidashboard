@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Airtime from "../../../_components/Airtime";
+import Data from "../../../_components/Data";
 import Tabs from "../../../_components/Tabs";
 
 const page = () => {
@@ -14,12 +15,14 @@ const page = () => {
       </div>
       <div className="md:p-4 p-2">
         <Tabs
-          tabData={[{ label: "Buy Airtiem" }, { label: "Buy Data Bundles " }]}
+          tabData={[{ label: "Buy Airtime" }, { label: "Buy Data Bundles " }]}
         >
           <div>
             <Airtime />
           </div>
-          <div>for you</div>
+          <div>
+            <Data />
+          </div>
         </Tabs>
       </div>
     </div>

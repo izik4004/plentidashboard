@@ -3,7 +3,7 @@ import { recentTopUp, brandAmount } from "../_constants/customerData";
 import { mtn, airtel, glo, etisalat } from "@/public/customerImages";
 type NetworkOption = {
   name: string;
-  imgSrc: string;
+  imgSrc: { src: string };
 };
 
 const options:NetworkOption[] = [
