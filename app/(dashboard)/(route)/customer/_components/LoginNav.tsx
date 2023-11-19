@@ -15,7 +15,8 @@ import {
   PhoneIcon,
   PlayCircleIcon,
 } from "@heroicons/react/20/solid";
-import { logo } from "@/images/index";
+import { logo } from "@/public/customerImages";
+
 
 type ProductType = {
   name: string;

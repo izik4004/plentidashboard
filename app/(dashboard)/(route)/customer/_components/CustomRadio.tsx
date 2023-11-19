@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { cart, deliveryBike } from "@/images/index";
+import { cart, deliveryBike } from "@/public/customerImages";
 
 type OptionType = {
   value: "Delivery options" | "Pay and pickup option";
