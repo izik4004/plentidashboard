@@ -79,14 +79,15 @@ const OtpInput: React.FC<Props> = ({ onOtpSubmit }) => {
             onKeyUp={(e) => handleKeyUp(e, index)}
             maxLength={1}
             ref={(el) => (inputsRef.current[index] = el)}
-            className="w-10 h-10 text-center border rounded-md"
+            className="w-10 h-10 bg-gray-white text-center border rounded-md"
+            style={{background:'#f3f3f3'}}
           />
         ))}
       </div>
 
       <button
         onClick={handleSubmit}
-        className="bg-white bg-red-500 text-white w-[90%] m-auto my-[1rem] block  text-grey-600 hover:bg-gray-700 hover:text-white text-left py-2 px-4 rounded-full flex items-center justify-center w-64"
+        className="bg-red-600 bg-red-500 text-white w-[90%] m-auto my-[1rem] block  text-grey-600 hover:bg-gray-700 hover:text-white text-left py-2 px-4 rounded-full flex items-center justify-center w-64"
       >
         Submit
       </button>

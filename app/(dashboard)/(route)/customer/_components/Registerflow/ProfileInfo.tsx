@@ -1,11 +1,20 @@
 import { loginimg } from "@/public/customerImages";
 import React from "react";
+import type { DatePickerProps } from 'antd';
+import { DatePicker } from 'antd';
+
 
 interface profileProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
+const onDate: DatePickerProps['onChange'] = (date, dateString) => {
+  console.log(date ? date.format() : null, dateString);
+};
 const ProfileInfo: React.FC<profileProps> = ({ onSubmit }) => {
+  const DatePickerAny: any = DatePicker;
+
+  
   return (
     <div className="flex justify-between my-[5rem]">
       <form action="" className="ml-[4rem]" onSubmit={onSubmit}>
@@ -78,13 +87,23 @@ const ProfileInfo: React.FC<profileProps> = ({ onSubmit }) => {
           >
             Date of Birth
           </label>
+          <DatePickerAny onChange={onDate}  className="bg-[#f3f3f3] border-none w-full p-[0.5rem] mt-2" />
+        </div>
+
+        <div className="my-[1.5rem]">
+          <label
+            htmlFor="state"
+            className="block text-sm font-medium leading-6 text-gray-400"
+          >
+            Password
+          </label>
           <div className="mt-2">
             <input
-              id="dob"
-              name="dob"
-              type="date"
+              id="state"
+              name="state"
+              type="text"
               autoComplete=""
-              placeholder="e.g 1/2/2020"
+              placeholder="e.g Enugu"
               required
               className="block w-full rounded-md bg-[#F3F3F3] border-0 py-1.5 text-gray-400 shadow-sm p-[0.5rem] placeholder:text-gray-400  sm:text-sm sm:leading-6"
             />
@@ -95,7 +114,7 @@ const ProfileInfo: React.FC<profileProps> = ({ onSubmit }) => {
             htmlFor="state"
             className="block text-sm font-medium leading-6 text-gray-400"
           >
-            State
+            Confirm Password
           </label>
           <div className="mt-2">
             <input
