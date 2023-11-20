@@ -1,24 +1,61 @@
 import { loginimg } from "@/public/customerImages";
-import React from "react";
-import type { DatePickerProps } from 'antd';
-import { DatePicker } from 'antd';
-
+import React, { useState } from "react";
+import type { DatePickerProps } from "antd";
+import { DatePicker } from "antd";
+import usePostRequest from "@/app/hooks/usepostRequest";
+import moment from "moment";
 
 interface profileProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-  email:string;
+  email: string;
+  mobile:string
 }
 
-const onDate: DatePickerProps['onChange'] = (date, dateString) => {
-  console.log(date ? date.format() : null, dateString);
-};
-const ProfileInfo: React.FC<profileProps> = ({ onSubmit, email }) => {
+const postRequest = usePostRequest();
+
+const ProfileInfo: React.FC<profileProps> = ({ onSubmit, email,mobile }) => {
+  const url = process.env.NEXT_PUBLIC_BASE_URL;
+
   const DatePickerAny: any = DatePicker;
 
-  
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    mobile,
+    email,
+    password: "",
+    password_confirmation: "",
+    dob: "",
+    gender: "",
+    state: "",
+    city: "",
+  });
+  console.log(formData);
+
+  const handleDateChange = (date: moment.Moment | null, dateString: string) => {
+    setFormData((prev) => ({ ...prev, dob: dateString }));
+  };
+  const { mutate, isError, error, isPending } = postRequest(
+    `${url}/auth/register`,
+    (responseData) => {
+      onSubmit(responseData);
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+  const handleRegister = (e: any) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    mutate(formData);
+  };
   return (
     <div className="flex justify-between my-[5rem]">
-      <form action="" className="ml-[4rem]" onSubmit={onSubmit}>
+      <form action="" className="ml-[4rem]" onSubmit={handleSubmit}>
         <h2 className="text-2xl"> Profile information </h2>
         <p className="text-gray-600 my-[1rem]">
           To continue, add your profile details. This information would help us
@@ -35,10 +72,11 @@ const ProfileInfo: React.FC<profileProps> = ({ onSubmit, email }) => {
           <div className="mt-2">
             <input
               id="f_name"
-              name="fname"
+              name="first_name"
               type="text"
               autoComplete=""
               required
+              onChange={handleRegister}
               className="block w-full rounded-md bg-[#F3F3F3] border-0 py-1.5 text-gray-400 shadow-sm p-[0.5rem] placeholder:text-gray-400  sm:text-sm sm:leading-6"
             />
           </div>
@@ -53,11 +91,12 @@ const ProfileInfo: React.FC<profileProps> = ({ onSubmit, email }) => {
           <div className="mt-2">
             <input
               id="l_name"
-              name="lname"
+              name="last_name"
               type="text"
               autoComplete=""
               placeholder="e.g Romeoscript chukwuemeka"
               required
+              onChange={handleRegister}
               className="block w-full rounded-md bg-[#F3F3F3] border-0 py-1.5 text-gray-400 shadow-sm p-[0.5rem] placeholder:text-gray-400  sm:text-sm sm:leading-6"
             />
           </div>
@@ -77,6 +116,7 @@ const ProfileInfo: React.FC<profileProps> = ({ onSubmit, email }) => {
               autoComplete=""
               placeholder="e.g male"
               required
+              onChange={handleRegister}
               className="block w-full rounded-md bg-[#F3F3F3] border-0 py-1.5 text-gray-400 shadow-sm p-[0.5rem] placeholder:text-gray-400  sm:text-sm sm:leading-6"
             />
           </div>
@@ -88,69 +128,98 @@ const ProfileInfo: React.FC<profileProps> = ({ onSubmit, email }) => {
           >
             Date of Birth
           </label>
-          <DatePickerAny onChange={onDate}  className="bg-[#f3f3f3] border-none w-full p-[0.5rem] mt-2" />
+          <DatePickerAny
+            onChange={handleDateChange}
+            className="bg-[#f3f3f3] border-none w-full p-[0.5rem] mt-2"
+          />
         </div>
 
-        <div className="my-[1.5rem]">
-          <label
-            htmlFor="state"
-            className="block text-sm font-medium leading-6 text-gray-400"
-          >
-            Password
-          </label>
-          <div className="mt-2">
-            <input
-              id="state"
-              name="state"
-              type="text"
-              autoComplete=""
-              placeholder="e.g Enugu"
-              required
-              className="block w-full rounded-md bg-[#F3F3F3] border-0 py-1.5 text-gray-400 shadow-sm p-[0.5rem] placeholder:text-gray-400  sm:text-sm sm:leading-6"
-            />
+        <figure className="flex justify-between gap-4">
+          <div className="my-[1rem] basis-[48%]">
+            <div className="flex items-center justify-between">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium leading-6 text-gray-400"
+              >
+                State
+              </label>
+            </div>
+            <div className="mt-2">
+              <input
+                id="State"
+                name="state"
+                type="text"
+                placeholder="your city"
+                required
+                onChange={handleRegister}
+                className="block w-full rounded-md bg-[#F3F3F3] border-0 py-1.5 text-gray-400 shadow-sm p-[0.5rem] placeholder:text-gray-400  sm:text-sm sm:leading-6"
+              />
+            </div>
           </div>
-        </div>
-        <div className="my-[1.5rem]">
-          <label
-            htmlFor="state"
-            className="block text-sm font-medium leading-6 text-gray-400"
-          >
-            Confirm Password
-          </label>
-          <div className="mt-2">
-            <input
-              id="state"
-              name="state"
-              type="text"
-              autoComplete=""
-              placeholder="e.g Enugu"
-              required
-              className="block w-full rounded-md bg-[#F3F3F3] border-0 py-1.5 text-gray-400 shadow-sm p-[0.5rem] placeholder:text-gray-400  sm:text-sm sm:leading-6"
-            />
+          <div className="my-[1rem] basis-[48%]">
+            <div className="flex items-center justify-between">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium leading-6 text-gray-400"
+              >
+                City
+              </label>
+            </div>
+            <div className="mt-2">
+              <input
+                id="city"
+                name="city"
+                type="text"
+                placeholder="your city"
+                required
+                onChange={handleRegister}
+                className="block w-full rounded-md bg-[#F3F3F3] border-0 py-1.5 text-gray-400 shadow-sm p-[0.5rem] placeholder:text-gray-400  sm:text-sm sm:leading-6"
+              />
+            </div>
           </div>
-        </div>
-
-        <div className="my-[1rem]">
-          <div className="flex items-center justify-between">
+        </figure>
+        <figure className="flex gap-4 justify-between">
+          <div className="my-[1.5rem] basis-[48%]">
             <label
               htmlFor="password"
               className="block text-sm font-medium leading-6 text-gray-400"
             >
-              Residential Address
+              Password
             </label>
+            <div className="mt-2">
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autoComplete=""
+                placeholder="e.g ****"
+                required
+                onChange={handleRegister}
+                className="block w-full rounded-md bg-[#F3F3F3] border-0 py-1.5 text-gray-400 shadow-sm p-[0.5rem] placeholder:text-gray-400  sm:text-sm sm:leading-6"
+              />
+            </div>
           </div>
-          <div className="mt-2">
-            <input
-              id="address"
-              name="address"
-              type="text"
-              placeholder="your home address"
-              required
-              className="block w-full rounded-md bg-[#F3F3F3] border-0 py-1.5 text-gray-400 shadow-sm p-[0.5rem] placeholder:text-gray-400  sm:text-sm sm:leading-6"
-            />
+          <div className="my-[1.5rem] basis-[48%]">
+            <label
+              htmlFor="password_confirmation"
+              className="block text-sm font-medium leading-6 text-gray-400"
+            >
+              Confirm Password
+            </label>
+            <div className="mt-2">
+              <input
+                id="password_confirmation"
+                name="password_confirmation"
+                type="password"
+                autoComplete=""
+                placeholder="e.g ****"
+                required
+                onChange={handleRegister}
+                className="block w-full rounded-md bg-[#F3F3F3] border-0 py-1.5 text-gray-400 shadow-sm p-[0.5rem] placeholder:text-gray-400  sm:text-sm sm:leading-6"
+              />
+            </div>
           </div>
-        </div>
-
+        </figure>
         <div className="mt-[3rem]">
           <button
             type="submit"

@@ -5,7 +5,7 @@ import { googleicon, appleicon, loginimg } from "@/public/customerImages";
 import usePostRequest from "@/app/hooks/usepostRequest";
 
 interface RegisterformProps {
-  onSubmit: (responseData: any, email:string) => void;
+  onSubmit: (responseData: any, email:string, mobile:string) => void;
 }
 
 const Registerform: React.FC<RegisterformProps> = ({ onSubmit }) => {
@@ -25,13 +25,15 @@ const Registerform: React.FC<RegisterformProps> = ({ onSubmit }) => {
   const { mutate, isError, error,isPending} = postRequest(
     `${url}/auth/verify-mobile-number`,
     (responseData) => {
-      console.log(responseData);
-      onSubmit(responseData,formData.email)
+      onSubmit(responseData,formData.email,formData.mobile)
     },
     (error) => {
       console.error(error);
     }
   );
+
+  console.log('new',formData.mobile, formData.email);
+  
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
