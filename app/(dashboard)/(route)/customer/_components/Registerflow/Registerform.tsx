@@ -1,14 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { googleicon, appleicon, loginimg } from "@/public/customerImages";
 
+
+import usePostRequest from "@/app/hooks/usepostRequest";
+
 interface RegisterformProps {
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit: (responseData: any, email:string) => void;
 }
 
 const Registerform: React.FC<RegisterformProps> = ({ onSubmit }) => {
+  const url = process.env.NEXT_PUBLIC_BASE_URL;
+
+  const [formData, setFormData] = useState({
+    mobile: "",
+    code: "",
+    email: "",
+  });
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+  const postRequest = usePostRequest();
+
+  const { mutate, isError, error,isPending} = postRequest(
+    `${url}/auth/verify-mobile-number`,
+    (responseData) => {
+      console.log(responseData);
+      onSubmit(responseData,formData.email)
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    mutate(formData);
+  };
   return (
     <div className="flex justify-between my-[5rem]">
-      <form action="" className="ml-[4rem] basis-[45%]" onSubmit={onSubmit}>
+      <form action="" className="ml-[4rem] basis-[45%]" onSubmit={handleSubmit}>
         <h2 className="text-2xl">Create your Plenti accont</h2>
         <p className="text-gray-600 my-[1rem]">
           Earn cashback and points when you shop at your favorite store.
@@ -24,8 +55,9 @@ const Registerform: React.FC<RegisterformProps> = ({ onSubmit }) => {
           <div className="mt-2">
             <input
               id="phone"
-              name="tel"
+              name="mobile"
               type="tel"
+              onChange={handleInputChange}
               autoComplete="tel"
               required
               className="block w-full rounded-md bg-[#F3F3F3] border-0 py-[0.7rem] text-gray-400 shadow-sm p-[0.5rem] placeholder:text-gray-400  sm:text-sm sm:leading-6"
@@ -47,7 +79,7 @@ const Registerform: React.FC<RegisterformProps> = ({ onSubmit }) => {
               id="code"
               name="code"
               type="tel"
-              required
+              onChange={handleInputChange}
               className="block w-full rounded-md bg-[#F3F3F3] border-0 py-[0.7rem] text-gray-400 shadow-sm p-[0.5rem] placeholder:text-gray-400  sm:text-sm sm:leading-6"
             />
           </div>
@@ -65,6 +97,7 @@ const Registerform: React.FC<RegisterformProps> = ({ onSubmit }) => {
               name="email"
               type="email"
               autoComplete="email"
+              onChange={handleInputChange}
               required
               className="block w-full rounded-md bg-[#F3F3F3] border-0 py-[0.7rem] text-gray-400 shadow-sm p-[0.5rem] placeholder:text-gray-400  sm:text-sm sm:leading-6"
             />

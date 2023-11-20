@@ -1,7 +1,8 @@
-import '../../globals.css'
+import "../../globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import LoginNav from '../customer/_components/LoginNav';
+import LoginNav from "../customer/_components/LoginNav";
+import { ReactQueryProvider } from "@/app/ReactQueryprovider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,13 +17,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="font-family-raleway bg-white">
-      <body className={`${inter.className}`} >
-        <div className="container mx-auto px-4">
-          <LoginNav />
-          {children}
-        </div>
-      </body>
-    </html>
+    <ReactQueryProvider>
+      <html lang="en" className="font-family-raleway bg-white">
+        <body className={`${inter.className}`}>
+          <div className="container mx-auto px-4">
+            <LoginNav />
+            {children}
+          </div>
+        </body>
+      </html>
+    </ReactQueryProvider>
   );
 }

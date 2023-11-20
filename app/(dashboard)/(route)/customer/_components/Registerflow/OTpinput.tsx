@@ -1,16 +1,32 @@
-// OtpInput.tsx
-
 import React, { useRef, useState } from "react";
+import usePostRequest from "@/app/hooks/usepostRequest";
 
 const TOTAL_OTP_NUM = 4;
 
 interface Props {
   onOtpSubmit: (otp: string) => void;
+  registrationData: any; 
 }
 
-const OtpInput: React.FC<Props> = ({ onOtpSubmit }) => {
+const OtpInput: React.FC<Props> = ({ onOtpSubmit, registrationData }) => {
+  const url = process.env.NEXT_PUBLIC_BASE_URL;
+  const postRequest = usePostRequest();
+
+  const id = registrationData.data.data.token.id;
+  const mobile = registrationData.data.data.token.mobile;
+
   const [otp, setOtp] = useState<string[]>(Array(TOTAL_OTP_NUM).fill(""));
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
+
+  const { mutate, isError, error, isPending } = postRequest(
+    `${url}/auth/validate-verification-pin`,
+    (responseData) => {
+      console.log(responseData);
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
 
   const focusNextInput = (index: number) => {
     if (index < TOTAL_OTP_NUM - 1) {
@@ -24,10 +40,7 @@ const OtpInput: React.FC<Props> = ({ onOtpSubmit }) => {
     }
   };
 
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const value = event.target.value;
     if (/^[0-9]$/.test(value)) {
       setOtp((prevOtp) => {
@@ -39,10 +52,7 @@ const OtpInput: React.FC<Props> = ({ onOtpSubmit }) => {
     }
   };
 
-  const handleKeyUp = (
-    event: React.KeyboardEvent<HTMLInputElement>,
-    index: number
-  ) => {
+  const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>, index: number) => {
     if (event.key === "Backspace") {
       setOtp((prevOtp) => {
         const newOtp = [...prevOtp];
@@ -56,7 +66,16 @@ const OtpInput: React.FC<Props> = ({ onOtpSubmit }) => {
   const handleSubmit = () => {
     const otpString = otp.join("");
     if (otpString.length === TOTAL_OTP_NUM) {
-      onOtpSubmit(otpString);
+      console.log(id,  mobile, otpString);
+      mutate({
+        id: id,
+        mobile: mobile,
+        pin: otpString
+      }, {
+        onSuccess: () => {
+          onOtpSubmit(otpString); 
+        },
+      });
     } else {
       alert("Please enter all digits of the OTP.");
     }
@@ -67,7 +86,7 @@ const OtpInput: React.FC<Props> = ({ onOtpSubmit }) => {
       <h2 className="font-bold text-2xl">Confirm your phone number</h2>
       <p className="text-center text-grey-600 my-[1rem]">
         Please enter the code that was sent to the phone number ending with{" "}
-        <span className="font-bold">3181</span>
+        <span className="font-bold">{mobile.slice(-4)}</span>
       </p>
       <div className="flex mb-4 space-x-2">
         {Array.from({ length: TOTAL_OTP_NUM }).map((_, index) => (

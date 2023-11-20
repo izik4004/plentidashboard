@@ -8,13 +8,18 @@ import Registerform from "../customer/_components/Registerflow/Registerform";
 
 const page = () => {
   const [step, setStep] = useState(1);
+  const [registrationResponse, setRegistrationResponse] = useState<any>(null);
+  const [email, setEmail] = useState<string>("");
+  
 
-  const handleRegisterSubmit = () => {
+  const handleRegisterSubmit = (responseData:any, email: string) => {
+    setRegistrationResponse(responseData);
+    setEmail(email);
+    console.log(email);
     setStep(2);
   };
 
-  const handleOtpSubmit = (otp: string) => {
-    console.log("OTP Submitted:", otp);
+  const handleOtpSubmit = () => {
     setStep(3);
   };
   const handleProfileSubmit = () => {
@@ -24,8 +29,8 @@ const page = () => {
   return (
     <div>
       {step === 1 && <Registerform onSubmit={handleRegisterSubmit} />}
-      {step === 2 && <OtpInput onOtpSubmit={handleOtpSubmit} />}
-      {step === 3 && <ProfileInfo onSubmit={handleProfileSubmit} />}
+      {step === 2 && <OtpInput registrationData={registrationResponse} onOtpSubmit={handleOtpSubmit} />}
+      {step === 3 && <ProfileInfo onSubmit={handleProfileSubmit} email={email} />}
       {step === 4 && <Brands />}
     </div>
   );

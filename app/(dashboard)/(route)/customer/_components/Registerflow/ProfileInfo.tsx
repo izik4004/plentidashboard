@@ -6,12 +6,13 @@ import { DatePicker } from 'antd';
 
 interface profileProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  email:string;
 }
 
 const onDate: DatePickerProps['onChange'] = (date, dateString) => {
   console.log(date ? date.format() : null, dateString);
 };
-const ProfileInfo: React.FC<profileProps> = ({ onSubmit }) => {
+const ProfileInfo: React.FC<profileProps> = ({ onSubmit, email }) => {
   const DatePickerAny: any = DatePicker;
 
   
