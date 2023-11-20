@@ -11,14 +11,17 @@ const page = () => {
   const [registrationResponse, setRegistrationResponse] = useState<any>(null);
   const [email, setEmail] = useState<string>("");
   const [mobile, setMobile] = useState<string>("");
-  
 
-  const handleRegisterSubmit = (responseData:any, email: string, mobile:string) => {
+  const handleRegisterSubmit = (
+    responseData: any,
+    email: string,
+    mobile: string
+  ) => {
     setRegistrationResponse(responseData);
     setEmail(email);
     setMobile(mobile);
-    console.log(email,mobile);
-    
+    console.log(email, mobile);
+
     setStep(2);
   };
 
@@ -31,10 +34,11 @@ const page = () => {
 
   return (
     <div>
-      {step === 1 && <Registerform onSubmit={handleRegisterSubmit} />}
+      {/* {step === 1 && <Registerform onSubmit={handleRegisterSubmit} />}
       {step === 2 && <OtpInput registrationData={registrationResponse} onOtpSubmit={handleOtpSubmit} />}
-      {step === 3 && <ProfileInfo onSubmit={handleProfileSubmit} mobile={mobile} email={email} />}
-      {step === 4 && <Brands />}
+      {step === 3 && <ProfileInfo onSubmit={handleProfileSubmit} mobile={mobile} email={email} />} */}
+      {/* {step === 4 && <Brands />} */}
+      <Brands />
     </div>
   );
 };
