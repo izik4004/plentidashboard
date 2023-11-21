@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useRouter } from "next/navigation"; // Correct import path
+import { useRouter } from "next/navigation"; // Assuming the correct import for useRouter
 import { choose_brand } from "../../_constants/customerData";
 
 const Brands = () => {
@@ -22,22 +22,18 @@ const Brands = () => {
   };
 
   return (
-    <section className="w-2/5 m-auto text-center h-[80vh] flex items-center justify-center flex-col">
-      {/* ... */}
-      <div className="grid grid-cols-3 my-[3rem] gap-6">
+    <section className="md:w-2/5 m-auto text-center h-[80vh] flex items-center justify-center flex-col ">
+      <div className="grid md:grid-cols-3 grid-cols-2 my-[3rem] gap-6">
         {choose_brand.map((brand, index) => {
-          // Use the image src or the index as the brand identifier
           const brandIdentifier = brand.src || `brand-${index}`;
+          const isSelected = selectedBrands.includes(brandIdentifier);
           return (
-            <div key={index} className="...">
-              <label>
-                <input
-                  type="checkbox"
-                  checked={selectedBrands.includes(brandIdentifier)}
-                  onChange={() => handleBrandChange(brandIdentifier)}
-                />
-                <img src={brand.src} alt={`Brand ${index}`} className="..." />
-              </label>
+            <div
+              key={index}
+              className={`h-[140px] p-[1rem] w-[140px] rounded-md border-[1px] cursor-pointer ${isSelected ? 'border-blue-500' : 'border-grey-600'}`}
+              onClick={() => handleBrandChange(brandIdentifier)}
+            >
+              <img src={brand.src} alt={`Brand ${index}`} className="w-full h-full object-cover" />
             </div>
           );
         })}

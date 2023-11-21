@@ -1,28 +1,67 @@
 import React, { useState } from "react";
 import { recentTopUp, brandAmount } from "../_constants/customerData";
 import { mtn, airtel, glo, etisalat } from "@/public/customerImages";
+import usePostRequest from "@/app/hooks/usepostRequest";
+
 type NetworkOption = {
   name: string;
   imgSrc: { src: string };
 };
 
-const options:NetworkOption[] = [
-  { name: "mtn", imgSrc: mtn }, // replace with your image paths
+const options: NetworkOption[] = [
+  { name: "mtn", imgSrc: mtn },
   { name: "airtel", imgSrc: airtel },
   { name: "glo", imgSrc: glo },
   { name: "9mobile", imgSrc: etisalat },
 ];
 const Airtime = () => {
-  const [selectedNetwork, setSelectedNetwork] = useState<NetworkOption | null>(null);
+  const [selectedNetwork, setSelectedNetwork] = useState<NetworkOption | null>(
+    null
+  );
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [amount, setAmount] = useState("");
+  const [mobile, setMobile] = useState("");
 
-
+  const url = process.env.NEXT_PUBLIC_BASE_URL;
+  const postRequest = usePostRequest();
+  const payload = {
+    amount: parseInt(amount),
+    network: selectedNetwork?.name.toUpperCase(),
+    paymentcode: "1", // This is a placeholder, replace with actual code if necessary
+    mobile: mobile,
+    reward: 1,
+  };
   const toggleDropdown = () => setDropdownOpen(!isDropdownOpen);
 
-  const selectNetwork = (option:any) => {
+  const handleAmountClick = (selectedAmount: string) => {
+    setAmount(selectedAmount);
+  };
+  const selectNetwork = (option: any) => {
     setSelectedNetwork(option);
     setDropdownOpen(false);
   };
+
+  const { mutate, isError, error, isPending } = postRequest(
+    `${url}/user/bills/buy-airtime`,
+    (responseData) => {
+      console.log("niceinfo", responseData);
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    if (!selectedNetwork || !amount || !mobile) {
+      alert("Please fill in all fields");
+      return;
+    }
+    mutate(payload);
+  };
+
+  console.log("info", payload);
+
   return (
     <div>
       Your recent top-up
@@ -39,19 +78,23 @@ const Airtime = () => {
       <section>
         <h2>Select an amount to top up </h2>
         <figure className="grid grid-cols-4">
-          {brandAmount.map((amount, index) => {
+          {brandAmount.map((brandAmount, index) => {
+            const isSelected = amount === brandAmount?.price;
             return (
               <div
-                className="bg-[#F8F8F8] rounded-lg m-[1rem] flex items-center justify-center flex-col py-[2.5rem] p-[1.5rem]"
+                className={`bg-[#F8F8F8] rounded-lg m-[1rem] flex items-center justify-center flex-col py-[2.5rem] p-[1.5rem] cursor-pointer ${
+                  isSelected ? "border-2 border-blue-500" : ""
+                }`}
                 key={index}
+                onClick={() => handleAmountClick(brandAmount.price)}
               >
                 <h2 className="text-[#626060] font-bold text-2xl">
                   {" "}
-                  &#8358;{amount.price}
+                  &#8358;{brandAmount.price}
                 </h2>
                 <p className="text-[#ED4249] font-bold">
                   {" "}
-                  {amount.points} points
+                  {brandAmount.points} points
                 </p>
               </div>
             );
@@ -69,7 +112,9 @@ const Airtime = () => {
               <input
                 type="text"
                 placeholder="Type here"
+                value={amount}
                 className="input input-bordered w-full bg-[#F3F3F3] text-[#A09F9F] "
+                onChange={(e) => setAmount(e.target.value)}
               />
             </div>
 
@@ -83,16 +128,23 @@ const Airtime = () => {
               <input
                 type="text"
                 placeholder="Type here"
+                value={mobile}
                 className="input input-bordered bg-[#F3F3F3] w-full text-[#A09F9F]"
+                onChange={(e) => setMobile(e.target.value)}
               />
             </div>
           </figure>
-          <div className=" relative inline-flex rounded-md bg-[#F3F3F3] w-full px-[1rem] cursor-pointer" onClick={toggleDropdown}>
-            <div className="w-full rounded-l-md px-4 py-2">  <span>{selectedNetwork ? selectedNetwork.name : "Network"}</span></div>
-            <div className="relative" >
+          <div
+            className=" relative inline-flex rounded-md bg-[#F3F3F3] w-full px-[1rem] cursor-pointer"
+            onClick={toggleDropdown}
+          >
+            <div className="w-full rounded-l-md px-4 py-2">
+              {" "}
+              <span>{selectedNetwork ? selectedNetwork.name : "Network"}</span>
+            </div>
+            <div className="relative">
               <button
                 type="button"
-               
                 className=" text-gray-600hover:text-gray-700 inline-flex h-full items-center justify-center rounded-r-md border-1 border-gray-10 "
               >
                 <svg
@@ -106,22 +158,32 @@ const Airtime = () => {
             </div>
           </div>
           <div className=" relative inline-flex rounded-md bg-[#F3F3F3] w-full  my-[0.5rem]">
-          {isDropdownOpen && (
-            <ul className=" z-10 w-full border mt-1 p-[1rem] rounded-md">
-              {options.map((option) => (
-                <li
-                  key={option.name}
-                  className="flex items-center px-4 py-2 hover:bg-[#A09F9F] rouned-md cursor-pointer"
-                  onClick={() => selectNetwork(option)}
-                >
-                  <img src={option.imgSrc.src} alt={option.name} className="h-6 w-6 mr-2" />
-                  <span>{option.name}</span>
-                </li>
-              ))}
-            </ul>
-          )}
+            {isDropdownOpen && (
+              <ul className=" z-10 w-full border mt-1 p-[1rem] rounded-md">
+                {options.map((option) => (
+                  <li
+                    key={option.name}
+                    className="flex items-center px-4 py-2 hover:bg-[#A09F9F] rouned-md cursor-pointer"
+                    onClick={() => selectNetwork(option)}
+                  >
+                    <img
+                      src={option.imgSrc.src}
+                      alt={option.name}
+                      className="h-6 w-6 mr-2"
+                    />
+                    <span>{option.name}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
+        <button
+          onClick={handleSubmit}
+          className="bg-red-600 rounded-full mx-4 px-4 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          Submit
+        </button>
       </section>
     </div>
   );

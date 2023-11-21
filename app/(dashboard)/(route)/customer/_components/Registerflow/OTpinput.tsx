@@ -82,8 +82,8 @@ const OtpInput: React.FC<Props> = ({ onOtpSubmit, registrationData }) => {
   };
 
   return (
-    <div className="flex flex-col items-center w-[35%] p-[3rem] m-auto mt-[13rem]">
-      <h2 className="font-bold text-2xl">Confirm your phone number</h2>
+    <div className="flex flex-col items-center md:w-[35%] p-[3rem] m-auto mt-[13rem]">
+      <h2 className="font-bold md:text-2xl text-l">Confirm your phone number</h2>
       <p className="text-center text-grey-600 my-[1rem]">
         Please enter the code that was sent to the phone number ending with{" "}
         <span className="font-bold">{mobile.slice(-4)}</span>

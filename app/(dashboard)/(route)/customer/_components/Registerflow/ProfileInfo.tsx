@@ -55,7 +55,7 @@ const ProfileInfo: React.FC<profileProps> = ({ onSubmit, email,mobile }) => {
   };
   return (
     <div className="flex justify-between my-[5rem]">
-      <form action="" className="ml-[4rem]" onSubmit={handleSubmit}>
+      <form action="" className="md:ml-[4rem]" onSubmit={handleSubmit}>
         <h2 className="text-2xl"> Profile information </h2>
         <p className="text-gray-600 my-[1rem]">
           To continue, add your profile details. This information would help us
@@ -223,13 +223,13 @@ const ProfileInfo: React.FC<profileProps> = ({ onSubmit, email,mobile }) => {
         <div className="mt-[3rem]">
           <button
             type="submit"
-            className="flex w-3/5 justify-center bg-red-600 rounded-full px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="flex md:w-3/5 w-full justify-center bg-red-600 rounded-full px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Next
           </button>
         </div>
       </form>
-      <img src={loginimg.src} alt="" />
+      <img className="md:block hidden" src={loginimg.src} alt="" />
     </div>
   );
 };

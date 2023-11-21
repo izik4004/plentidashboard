@@ -26,13 +26,15 @@ const Registerform: React.FC<RegisterformProps> = ({ onSubmit }) => {
     `${url}/auth/verify-mobile-number`,
     (responseData) => {
       onSubmit(responseData,formData.email,formData.mobile)
+      console.log(responseData);
+      
     },
     (error) => {
       console.error(error);
     }
   );
 
-  console.log('new',formData.mobile, formData.email);
+
   
 
   const handleSubmit = (event: any) => {
@@ -41,7 +43,7 @@ const Registerform: React.FC<RegisterformProps> = ({ onSubmit }) => {
   };
   return (
     <div className="flex justify-between my-[5rem]">
-      <form action="" className="ml-[4rem] basis-[45%]" onSubmit={handleSubmit}>
+      <form action="" className="md:ml-[4rem] md:basis-[45%]" onSubmit={handleSubmit}>
         <h2 className="text-2xl">Create your Plenti accont</h2>
         <p className="text-gray-600 my-[1rem]">
           Earn cashback and points when you shop at your favorite store.
@@ -104,7 +106,7 @@ const Registerform: React.FC<RegisterformProps> = ({ onSubmit }) => {
               className="block w-full rounded-md bg-[#F3F3F3] border-0 py-[0.7rem] text-gray-400 shadow-sm p-[0.5rem] placeholder:text-gray-400  sm:text-sm sm:leading-6"
             />
           </div>
-          <div className="flex items-center justify-between my-[1.5rem]">
+          <div className="flex items-center justify-between my-[1.5rem] ">
             <div className="text-sm">
               already have an account?
               <a
@@ -136,7 +138,7 @@ const Registerform: React.FC<RegisterformProps> = ({ onSubmit }) => {
           Sign in with Apple
         </button>
       </form>
-      <div className="basis-[45%]">
+      <div className="basis-[45%] hidden md:block">
         <img src={loginimg.src} alt="" />
       </div>
     </div>

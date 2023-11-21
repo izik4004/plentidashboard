@@ -161,24 +161,28 @@ const pointOptions = [
     text: "airtime & data",
     background: "#F9EFFD",
     color: "#7C3C7D",
+    link:'/customer/category/otherservices/Airtime'
   },
   {
     img: phone,
     text: "Gift cards",
     background: "#F9EFFD",
     color: "#7C3C7D",
+    link:'/customer/category/otherservices/Airtime'
   },
   {
     img: phone,
     text: "Plenti vouchers",
     background: "#F9EFFD",
     color: "#7C3C7D",
+    link:'/customer/category/otherservices/Airtime'
   },
   {
     img: phone,
     text: "refer a friend",
     background: "#F9EFFD",
     color: "#7C3C7D",
+    link:'/customer/category/otherservices/Airtime'
   },
 ];
 
@@ -298,23 +302,23 @@ const brandAmount = [
     points: "5",
   },
   {
-    price: "50",
+    price: "500",
     points: "5",
   },
   {
-    price: "50",
+    price: "510",
     points: "5",
   },
   {
-    price: "50",
+    price: "20",
     points: "5",
   },
   {
-    price: "50",
+    price: "110",
     points: "5",
   },
   {
-    price: "50",
+    price: "20",
     points: "5",
   },
   {
