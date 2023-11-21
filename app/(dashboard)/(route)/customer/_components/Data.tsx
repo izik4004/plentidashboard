@@ -55,20 +55,20 @@ const Data = () => {
   ];
   return (
     <>
-      <div className="grid grid-cols-5 gap-8">
+      <div className="grid md:grid-cols-5 grid-cols-4 gap-8">
         {dataDeals.map((data, index) => {
           return (
             <div
-              className="bg-[#F8F8F8] rounded-[12px]  flex items-center justify-between min-w-[130px] flex-col"
+              className="bg-[#F8F8F8] rounded-[12px] max-md:w-[68px]  flex items-center justify-between md:min-w-[130px] flex-col"
               key={index}
             >
-              <p className="bg-[#FCF0EB] text-[#FF6F33] text-center p-[0.5rem] rounded-t-[12px] w-full">
+              <p className="bg-[#FCF0EB] text-[#FF6F33] max-md:text-[10px] text-center p-[0.5rem] rounded-t-[12px] w-full">
                 {" "}
                 1 Day
               </p>
               <div>
-                <p className="p-[1rem] ">100 MB</p>
-                <p className="text-[#ED4249] px-[1rem] pb-[1.2rem]">5 point</p>
+                <p className="md:p-[1rem] p-[0.5rem] max-md:text-[12px]  ">100 MB</p>
+                <p className="text-[#ED4249] px-[1rem] max-md:text-[10px] pb-[1.2rem]">5 point</p>
               </div>
             </div>
           );

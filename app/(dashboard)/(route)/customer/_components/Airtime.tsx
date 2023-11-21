@@ -69,8 +69,8 @@ const Airtime = () => {
         {recentTopUp.map((recent, index) => {
           return (
             <div className="my-[1rem] " key={index}>
-              <img src={recent.brand.src} alt="" />
-              <p className="my-[1rem]">{recent.num}</p>
+              <img src={recent.brand.src} className='md:h-[80px] md:w-[80px] w-[60px] h-[60px] rounded-full' alt="" />
+              <p className="my-[1rem] max-md:text-[12px]">{recent.num}</p>
             </div>
           );
         })}
@@ -82,17 +82,17 @@ const Airtime = () => {
             const isSelected = amount === brandAmount?.price;
             return (
               <div
-                className={`bg-[#F8F8F8] rounded-lg m-[1rem] flex items-center justify-center flex-col py-[2.5rem] p-[1.5rem] cursor-pointer ${
+                className={`bg-[#F8F8F8] rounded-lg m-[1rem] max-md:w-[68px] place-items-center flex items-center justify-center flex-col md:py-[2.5rem] p-[0.5rem] md:p-[1.5rem] cursor-pointer ${
                   isSelected ? "border-2 border-blue-500" : ""
                 }`}
                 key={index}
                 onClick={() => handleAmountClick(brandAmount.price)}
               >
-                <h2 className="text-[#626060] font-bold text-2xl">
+                <h2 className="text-[#626060] font-bold md:text-2xl">
                   {" "}
                   &#8358;{brandAmount.price}
                 </h2>
-                <p className="text-[#ED4249] font-bold">
+                <p className="text-[#ED4249] max-md:text-[10px] font-bold">
                   {" "}
                   {brandAmount.points} points
                 </p>
@@ -101,7 +101,7 @@ const Airtime = () => {
           })}
         </figure>
         <div className="p-[1.5rem]">
-          <figure className="flex items-center justify-center gap-5 mb-[1rem]">
+          <figure className="md:flex items-center justify-center gap-5 mb-[1rem]">
             <div className="form-control w-full ">
               <label className="label">
                 <span className="label-text">Amount</span>
@@ -180,7 +180,7 @@ const Airtime = () => {
         </div>
         <button
           onClick={handleSubmit}
-          className="bg-red-600 rounded-full mx-4 px-4 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          className="bg-red-600 max-md:w-full max-md:mb-[4rem] rounded-full md:mx-4 px-4 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           Submit
         </button>
