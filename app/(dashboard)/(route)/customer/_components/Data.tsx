@@ -67,7 +67,7 @@ const Data = () => {
                 1 Day
               </p>
               <div>
-                <p className="md:p-[1rem] p-[0.5rem] max-md:text-[12px]  ">100 MB</p>
+                <p className="md:p-[1rem] p-[0.5rem] max-md:text-[12px]">100 MB</p>
                 <p className="text-[#ED4249] px-[1rem] max-md:text-[10px] pb-[1.2rem]">5 point</p>
               </div>
             </div>
