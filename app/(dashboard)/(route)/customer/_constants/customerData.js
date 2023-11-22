@@ -22,27 +22,31 @@ import {
   deal,
   mall,
   mallimage,
+  mtn,
+  airtel,
+  etisalat,
+  glo,
 } from "@/public/customerImages";
 
 const navLinks = [
   {
     name: "Home",
-    link: "/customers",
+    link: "/customer",
     icons: home_icon,
   },
   {
     name: "Category",
-    link: "/category",
+    link: "/customer/category",
     icons: category_icon,
   },
   {
     name: "Stores",
-    link: "/stores",
+    link: "/customer/stores",
     icons: store_icon,
   },
   {
     name: "Profile",
-    link: "/profile",
+    link: "/cusotmer/profile",
     icons: profile_icon,
   },
 ];
@@ -157,24 +161,28 @@ const pointOptions = [
     text: "airtime & data",
     background: "#F9EFFD",
     color: "#7C3C7D",
+    link:'/customer/category/otherservices/Airtime'
   },
   {
     img: phone,
     text: "Gift cards",
     background: "#F9EFFD",
     color: "#7C3C7D",
+    link:'/customer/category/otherservices/Airtime'
   },
   {
     img: phone,
     text: "Plenti vouchers",
     background: "#F9EFFD",
     color: "#7C3C7D",
+    link:'/customer/category/otherservices/Airtime'
   },
   {
     img: phone,
     text: "refer a friend",
     background: "#F9EFFD",
     color: "#7C3C7D",
+    link:'/customer/category/otherservices/Airtime'
   },
 ];
 
@@ -269,8 +277,62 @@ const colors = [
   "#A5FEE3",
 ];
 const choose_brand = [brand1, brand2, brand3, brand1, brand2, brand3];
+const recentTopUp = [
+  {
+    brand: mtn,
+    num: "091282822",
+  },
+  {
+    brand: airtel,
+    num: "091282822",
+  },
+  {
+    brand: etisalat,
+    num: "091282822",
+  },
+  {
+    brand: glo,
+    num: "091282822",
+  },
+];
 
+const brandAmount = [
+  {
+    price: "50",
+    points: "5",
+  },
+  {
+    price: "500",
+    points: "5",
+  },
+  {
+    price: "510",
+    points: "5",
+  },
+  {
+    price: "20",
+    points: "5",
+  },
+  {
+    price: "110",
+    points: "5",
+  },
+  {
+    price: "20",
+    points: "5",
+  },
+  {
+    price: "50",
+    points: "5",
+  },
+  {
+    price: "50",
+    points: "5",
+  },
+];
 export {
+  brandAmount,
+  recentTopUp,
   navLinks,
   offerCard,
   pointOptions,

@@ -1,5 +1,6 @@
 import React from "react";
-import { pointOptions, cate } from "../../customer/_constants/customerData"
+import { pointOptions, cate } from "../../customer/_constants/customerData";
+import Link from "next/link";
 
 const MorePoints1: () => React.JSX.Element = () => {
   return (
@@ -10,21 +11,23 @@ const MorePoints1: () => React.JSX.Element = () => {
       </div>
       <aside className="grid gap-4 place-items-center md:grid-cols-4 sm:grid-cols-3 grid-cols-2 p-[1rem] my-[0.5rem]">
         {pointOptions.map((points, index) => {
-          const { img, text, background, color } = points;
+          const { img, text, link, background, color } = points;
           const divStyle = {
             backgroundColor: background,
             color: color,
           };
 
           return (
-            <div
-              className="h-[140px] w-[140px]  flex items-center justify-center flex-col  rounded-lg"
-              style={divStyle}
-              key={index}
-            >
-              <img src={img.src} alt="" />
-              {text}
-            </div>
+            <Link href={link}  key={index}>
+              <div
+                className="h-[140px] w-[140px]  flex items-center justify-center flex-col  rounded-lg"
+                style={divStyle}
+               
+              >
+                <img src={img.src} alt="" />
+                {text}
+              </div>
+            </Link>
           );
         })}
       </aside>

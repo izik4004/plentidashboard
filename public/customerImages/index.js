@@ -10,34 +10,41 @@ import promotionlady from "./promotion_lady.svg";
 import phone from "./phone.svg";
 import restaurant from "./restaurant.svg";
 import grocery from "./grocery.svg";
-import cart1 from './cart1.svg'
-import cart2 from './cart2.svg'
-import cart3 from './cart3.svg'
-import cart4 from './cart4.svg'
-import cart5 from './cart5.svg'
-import cart6 from './cart6.svg'
-import cart7 from './cart7.svg'
-import cart8 from './cart8.svg'
-import brand1 from './brand1.svg'
-import brand2 from './brand2.svg'
-import brand3 from './brand3.svg'
-import deal from './deal.svg'
-import mall from './mall.svg'
-import mallimage from './mallimage.svg'
-import stone_logo from './coldstone_logo.png'
-import stone_banner from './detailbanner.svg'
-import gift from './gift.svg'
-import withdraw from './withdraw.svg'
-import apply from './apply.svg'
-import settings from './settings.svg'
-import loginimg from './loginimg.svg'
-import googleicon from './googleicon.svg'
-import appleicon from './appleicon.svg'
-import cart from "./cart.svg"
-import deliveryBike from "./deliveryBike.svg"
-
+import cart1 from "./cart1.svg";
+import cart2 from "./cart2.svg";
+import cart3 from "./cart3.svg";
+import cart4 from "./cart4.svg";
+import cart5 from "./cart5.svg";
+import cart6 from "./cart6.svg";
+import cart7 from "./cart7.svg";
+import cart8 from "./cart8.svg";
+import brand1 from "./brand1.svg";
+import brand2 from "./brand2.svg";
+import brand3 from "./brand3.svg";
+import deal from "./deal.svg";
+import mall from "./mall.svg";
+import mallimage from "./mallimage.svg";
+import stone_logo from "./coldstone_logo.png";
+import stone_banner from "./detailbanner.svg";
+import gift from "./gift.svg";
+import withdraw from "./withdraw.svg";
+import apply from "./apply.svg";
+import settings from "./settings.svg";
+import loginimg from "./loginimg.svg";
+import googleicon from "./googleicon.svg";
+import appleicon from "./appleicon.svg";
+import cart from "./cart.svg";
+import deliveryBike from "./deliveryBike.svg";
+import mtn from "./mtn.svg";
+import airtel from "./airtel.svg";
+import glo from "./glo.svg";
+import etisalat from "./etisalat.svg";
 
 export {
+  etisalat,
+  mtn,
+  airtel,
+  glo,
   deliveryBike,
   cart,
   appleicon,
@@ -74,5 +81,5 @@ export {
   mall,
   mallimage,
   stone_logo,
-  loginimg
+  loginimg,
 };

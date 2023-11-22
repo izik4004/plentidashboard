@@ -9,7 +9,7 @@ const Sidebar = () => {
   const currentRoute = usePathname();
 
   return (
-    <div className=" bg-white md:sticky top-[80px] left-0 md:w-[280px] md:h-[100vh] ">
+    <div className=" bg-white md:sticky top-[80px] left-0 md:w-[250px] md:h-[100vh] ">
      
       <ul className="md:block hidden">
         {navLinks.map((nav) => {

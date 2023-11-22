@@ -30,7 +30,7 @@ const page = () => {
       >
         <div>
           {" "}
-          <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-4 my-[2rem]">
+          <div className="grid  md:grid-cols-2 gap-4 my-[2rem]">
             {malls.map((mall) => {
               return (
                 <div className="md:w-[320px] mb-[2rem] md:block flex justify-between gap-4 md:p-0 p-[1rem] max-md:border-2 rounded-[12px] h-auto">
