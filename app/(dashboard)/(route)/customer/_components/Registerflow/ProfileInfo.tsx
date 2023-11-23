@@ -1,6 +1,5 @@
 import { loginimg } from "@/public/customerImages";
 import React, { useState } from "react";
-import type { DatePickerProps } from "antd";
 import { DatePicker } from "antd";
 import usePostRequest from "@/app/hooks/usepostRequest";
 import moment from "moment";
