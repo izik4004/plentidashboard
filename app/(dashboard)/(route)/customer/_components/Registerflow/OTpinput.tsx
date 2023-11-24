@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import usePostRequest from "@/app/hooks/usepostRequest";
+import Loading from "@/app/(dashboard)/_components/loading";
 
 const TOTAL_OTP_NUM = 4;
 
@@ -13,6 +14,8 @@ const OtpInput: React.FC<Props> = ({ onOtpSubmit, registrationData }) => {
   const postRequest = usePostRequest();
 
   const id = registrationData.data.data.token.id;
+  console.log(id);
+  
   const mobile = registrationData.data.data.token.mobile;
 
   const [otp, setOtp] = useState<string[]>(Array(TOTAL_OTP_NUM).fill(""));
@@ -83,6 +86,7 @@ const OtpInput: React.FC<Props> = ({ onOtpSubmit, registrationData }) => {
 
   return (
     <div className="flex flex-col items-center md:w-[35%] p-[3rem] m-auto mt-[13rem]">
+      {isPending && <Loading />}
       <h2 className="font-bold md:text-2xl text-l">Confirm your phone number</h2>
       <p className="text-center text-grey-600 my-[1rem]">
         Please enter the code that was sent to the phone number ending with{" "}

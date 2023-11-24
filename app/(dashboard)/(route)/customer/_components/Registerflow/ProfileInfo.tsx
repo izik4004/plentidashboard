@@ -3,16 +3,17 @@ import React, { useState } from "react";
 import { DatePicker } from "antd";
 import usePostRequest from "@/app/hooks/usepostRequest";
 import moment from "moment";
+import Loading from "@/app/(dashboard)/_components/loading";
 
 interface profileProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   email: string;
-  mobile:string
+  mobile: string;
 }
 
 const postRequest = usePostRequest();
 
-const ProfileInfo: React.FC<profileProps> = ({ onSubmit, email,mobile }) => {
+const ProfileInfo: React.FC<profileProps> = ({ onSubmit, email, mobile }) => {
   const url = process.env.NEXT_PUBLIC_BASE_URL;
 
   const DatePickerAny: any = DatePicker;
@@ -54,6 +55,7 @@ const ProfileInfo: React.FC<profileProps> = ({ onSubmit, email,mobile }) => {
   };
   return (
     <div className="flex justify-between my-[5rem]">
+      {isPending && <Loading />}
       <form action="" className="md:ml-[4rem]" onSubmit={handleSubmit}>
         <h2 className="text-2xl"> Profile information </h2>
         <p className="text-gray-600 my-[1rem]">

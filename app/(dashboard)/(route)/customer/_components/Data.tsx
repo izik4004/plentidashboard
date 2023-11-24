@@ -1,8 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { mtn, airtel, glo, etisalat } from "@/public/customerImages";
-import { Select, Space } from "antd";
+import { Select } from "antd";
+import { useQuery } from "@tanstack/react-query";
+import usePostRequest from "@/app/hooks/usepostRequest";
+import axios from "axios";
+import Swal from "sweetalert2";
+import Loading from "@/app/(dashboard)/_components/loading";
 
 const { Option } = Select;
+const fetchPackages = async () => {
+  const response = await axios.get(
+    "https://admin.plenti.africa/api/v1/user/bills/dataplan-operators",
+    {
+      headers: {
+        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI3IiwianRpIjoiYzQ2NDcyMDBmMWNhYTEyOTVjNmE1YWZlODA4MzJlMTdjNWZmMGU3ZTMzZGUzNTI2NjA3OGU5MmFlMzAzYzUwNjljYjUyMThmOTI2ZjNiN2QiLCJpYXQiOjE3MDA1NjUyMDUsIm5iZiI6MTcwMDU2NTIwNSwiZXhwIjoxNzMyMTg3NjA1LCJzdWIiOiIxMDQ0OSIsInNjb3BlcyI6W119.Qu7npoF72PWnw3Qz0apGTd5W7XQxTo4DiI02hcVkMubq6K7d1vfl9fOPVSxNLBtLzFV7Rnrd2VYIEsRUom67i45VKxZfGzUzz6NApZkirwA2Q4Gx-hz-nZ6nXABRuW36vvnYXRRqmMqK03R3pnOI3R6aq5fvK033gv6Kmx0TwWtconP3eyIjTviSVD3TGjZYYhDyFZaJPNW8aG5qDz0BJooFZowS28aiMlBisufHJhKlv9w-c7575b5PG0jRBMTQsHHSOLd5wVRGfzfloMI96VDo5auGfRR8PDUvhP76aN0ZPuDZaaOoJqSDBHQ-cAkyQeGOHjHCGSvhiWsiyrf6rebw-7zyWHP6YdXGOqbooQAfYMwf7H-dxLfcES9mitWPt7P2KR2a8lIvPcCubtS8SqU3fKgXttA4HMhuhGZbE_dYpcuqGJJKxOmZL4JGyJUM6m6VA8NeI1ELKxGUY4lGAWTIpztu_IRLviuam8_ecHBwYY2ZPf2xzHrlad_x0kg-axUvvlmrg9je4y0FuftCyBVQlvwEhfTSjAp44jlUiSW29UymHhJABWDo5-Kkn8tNjXbZnppuXaFUL-bLTL7uPRimlL0_U8Jew99yEzik3WrW5pRyU8swM816J4gQKf_jzHn7EjV5vjQ6Welloqgub-PhxTNWhf8HN9fDDCqPLBs`,
+      },
+    }
+  );
+
+  return response.data.data;
+};
+
 const optionsWithImages = [
   { value: "GLO", label: "GLO", image: glo },
   { value: "MTN", label: "MTN", image: mtn },
@@ -11,6 +29,7 @@ const optionsWithImages = [
 ];
 
 const Data = () => {
+  const [selectedDuration, setSelectedDuration] = useState("daily");
   const [selectedValue, setSelectedValue] = useState({
     amount: "",
     mobile: "",
@@ -22,6 +41,13 @@ const Data = () => {
     showPackageSelect: false,
     showAmountField: false,
   });
+
+  const { data: packages, isLoading } = useQuery({
+    queryFn: () => fetchPackages(),
+    queryKey: ["packages"],
+  });
+  console.log("response", packages);
+
   const determineNetwork = (mobileNumber: any) => {
     const prefix = mobileNumber.substring(0, 4);
     if (
@@ -97,6 +123,25 @@ const Data = () => {
     }));
   };
 
+  const handleDurationClick = (duration: string) => {
+    setSelectedDuration(duration);
+  };
+
+  const filteredPackages = packages?.filter((p) => {
+    const durationCondition =
+      selectedDuration === "daily"
+        ? "1 day"
+        : selectedDuration === "weekly"
+        ? "7 days"
+        : "30 days";
+    return p.data_options_desc.includes(durationCondition);
+  });
+
+  const extractDataAmount = (description: string) => {
+    const match = description.match(/(\d+)(?:MB|GB)/i);
+    return match ? match[0] : "";
+  };
+
   const handleChange = (e: any) => {
     const { name, value } = e.target
       ? e.target
@@ -105,69 +150,100 @@ const Data = () => {
     if (name === "dataplan" && value) {
       setSelectedValue((prev) => ({ ...prev, showAmountField: true }));
     }
+
+    if (e.name === "dataplan") {
+      const selectedPackage = packages.find((p: any) =>
+        p.data_options_desc.includes(e.value)
+      );
+      if (selectedPackage) {
+        setSelectedValue((prev) => ({
+          ...prev,
+          amount: selectedPackage.amount,
+          paymentcode: selectedPackage.payment_code.trim(),
+          showAmountField: true,
+        }));
+      }
+    }
     console.log(selectedValue);
   };
+  const url = process.env.NEXT_PUBLIC_BASE_URL;
+  const postRequest = usePostRequest();
+  const { mutate, isError, error, isPending } = postRequest(
+    `${url}/user/bills/buy-data`,
+    (responseData) => {
+      Swal.fire({
+        title: "Success!",
+        text: "Data purchase was successful.",
+        icon: "success",
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `,
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `,
+        },
+      });
+      setSelectedValue({
+        amount: "",
+        mobile: "",
+        dataplan: "",
+        network: "",
+        reward: 1,
+        paymentcode: "",
+        showNetworkSelect: false,
+        showPackageSelect: false,
+        showAmountField: false,
+      });
+
+      console.log(responseData);
+    },
+    (error) => {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
+      console.error(error);
+    }
+  );
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    mutate(selectedValue);
     console.log(selectedValue);
   };
-  const dataDeals = [
-    {
-      days: 1,
-      balance: "100 MB",
-      points: 5,
-    },
-    {
-      days: 1,
-      balance: "100 MB",
-      points: 5,
-    },
-    {
-      days: 1,
-      balance: "100 MB",
-      points: 5,
-    },
-    {
-      days: 1,
-      balance: "100 MB",
-      points: 5,
-    },
-    {
-      days: 1,
-      balance: "100 MB",
-      points: 5,
-    },
-    {
-      days: 1,
-      balance: "100 MB",
-      points: 5,
-    },
-    {
-      days: 1,
-      balance: "100 MB",
-      points: 5,
-    },
-    {
-      days: 1,
-      balance: "100 MB",
-      points: 5,
-    },
-    {
-      days: 1,
-      balance: "100 MB",
-      points: 5,
-    },
-    {
-      days: 1,
-      balance: "100 MB",
-      points: 5,
-    },
-  ];
 
   return (
     <>
+      {isPending && <Loading />}
+      <div className="flex justify-around p-[2rem]">
+        <span
+          className="cursor-pointer"
+          onClick={() => handleDurationClick("daily")}
+        >
+          Daily
+        </span>
+        <span
+          className="cursor-pointer"
+          onClick={() => handleDurationClick("weekly")}
+        >
+          Weekly
+        </span>
+        <span
+          className="cursor-pointer"
+          onClick={() => handleDurationClick("monthly")}
+        >
+          Monthly
+        </span>
+      </div>
       <div className="grid md:grid-cols-5 grid-cols-4 gap-8">
-        {dataDeals.map((data, index) => {
+        {filteredPackages?.map((data: any, index: any) => {
           return (
             <div
               className="bg-[#F8F8F8] rounded-[12px] max-md:w-[75px]  flex items-center justify-between md:min-w-[130px] flex-col"
@@ -175,14 +251,16 @@ const Data = () => {
             >
               <p className="bg-[#FCF0EB] text-[#FF6F33] max-md:text-[10px] text-center p-[0.5rem] rounded-t-[12px] w-full">
                 {" "}
-                1 Day
+                {selectedDuration.charAt(0).toUpperCase() +
+                  selectedDuration.slice(1)}{" "}
+                Plan
               </p>
               <div>
                 <p className="md:p-[1rem] p-[0.5rem] max-md:text-[12px]">
-                  100 MB
+                  {extractDataAmount(data.data_options_desc)}
                 </p>
                 <p className="text-[#ED4249] px-[1rem] max-md:text-[10px] pb-[1.2rem]">
-                  5 point
+                  {data.operator}
                 </p>
               </div>
             </div>
@@ -232,21 +310,28 @@ const Data = () => {
               </Select>
             </figure>
           )}
-
+          <input
+            type="hidden"
+            name="paymentcode"
+            value={selectedValue.paymentcode}
+          />
           {selectedValue.showPackageSelect && (
             <figure className="my-[1rem]">
               <label className="label-text">Package</label>
+
               <Select
                 value={selectedValue.dataplan}
                 className="w-full h-[45px]"
                 onChange={(value) => handleChange({ name: "dataplan", value })}
-                options={[
-                  { value: "jack", label: "Jack" },
-                  { value: "lucy", label: "Lucy" },
-                  { value: "Yiminghe", label: "yiminghe" },
-                  { value: "disabled", label: "Disabled", disabled: true },
-                ]}
-              />
+              >
+                {packages
+                  .filter((p) => p.operator.trim() === selectedValue.network)
+                  .map((p) => (
+                    <Option key={p.id} value={p.data_options_desc}>
+                      {p.data_options_desc}
+                    </Option>
+                  ))}
+              </Select>
             </figure>
           )}
           {selectedValue.showAmountField && (
@@ -264,7 +349,12 @@ const Data = () => {
             </>
           )}
         </div>
-        <button type="submit">submit</button>
+        <button
+          type="submit"
+          className="bg-red-600 bg-red-500 text-white w-[90%] m-auto my-[1rem] block  text-grey-600 hover:bg-gray-700 hover:text-white text-left py-2 px-4 rounded-full flex items-center justify-center w-64"
+        >
+          submit
+        </button>
       </form>
     </>
   );
