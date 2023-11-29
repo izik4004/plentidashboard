@@ -10,7 +10,7 @@ import Tabs from "../customer/_components/Tabs";
 
 export default function CustomerHome() {
   return (
-    <div className="p-6">
+    <div className="md:p-6">
       <h2 className="md:m-[1.5rem] m-[1rem] text-[#818080]">
         Good Day ,<span className="font-bold text-black"> Romeoscript</span>
         <Searchbar />

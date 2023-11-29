@@ -1,8 +1,9 @@
-"use client"
+"use client";
 import React from "react";
 import { stone_logo, stone_banner } from "@/public/customerImages/index";
 import Tabs from "../../../_components/Tabs";
 import OfferDecription from "../../../_components/OfferDecription";
+import Map from "../../../_components/Map";
 
 const page = () => {
   return (
@@ -29,31 +30,29 @@ const page = () => {
       </aside>
 
       <Tabs
-          tabData={[
-            { label: "Offer Description" },
-            { label: "Store Locations" },
-            { label: "Terms and Conditions " },
-          ]}
-        >
-          <div>
-            {" "}
-            <OfferDecription />
-         <div className="flex items-center flex-col gap-4 my-[2rem]">
-         <button className="bg-[#EA1C24] text-[#FFEAEB] rounded-[24px] h-[48px] block md:w-2/5 w-4/5 px-[3rem] py-[0.5rem]">
-            claim this deal
-          </button>
-          <button className="text-[#EA1C24] bg-[#FFEAEB] rounded-[24px] h-[48px] block md:w-2/5 w-4/5 px-[3rem] py-[0.5rem]">
-           share to earn points 
-          </button>
-         </div>
+        tabData={[
+          { label: "Offer Description" },
+          { label: "Store Locations" },
+          { label: "Terms and Conditions " },
+        ]}
+      >
+        <div>
+          {" "}
+          <OfferDecription />
+          <div className="flex items-center flex-col gap-4 my-[2rem]">
+            <button className="bg-[#EA1C24] text-[#FFEAEB] rounded-[24px] h-[48px] block md:w-2/5 w-4/5 px-[3rem] py-[0.5rem]">
+              claim this deal
+            </button>
+            <button className="text-[#EA1C24] bg-[#FFEAEB] rounded-[24px] h-[48px] block md:w-2/5 w-4/5 px-[3rem] py-[0.5rem]">
+              share to earn points
+            </button>
           </div>
-          <div>for you</div>
-          <div>
-            info 3
-          </div>
-        </Tabs>
-
-   
+        </div>
+        <div>
+          <Map />
+        </div>
+        <div>info 3</div>
+      </Tabs>
     </div>
   );
 };

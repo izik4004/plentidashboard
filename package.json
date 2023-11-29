@@ -12,6 +12,7 @@
     "@clerk/nextjs": "^4.25.4",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@googlemaps/js-api-loader": "^1.16.2",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
     "@hookform/resolvers": "^3.3.2",
@@ -63,6 +64,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/google.maps": "^3.54.10",
     "@types/moment": "^2.13.0",
     "daisyui": "^3.9.4",
     "prisma": "^5.4.2"

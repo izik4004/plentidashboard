@@ -10,7 +10,7 @@ import Searchbar from "../_components/Searchbar";
 
 const page = () => {
   return (
-    <div className="p-6">
+    <div className="md:p-6">
       <h2 className="py-[1rem] text-2xl text-[#424040] capitalize font-bold">
         category
       </h2>
