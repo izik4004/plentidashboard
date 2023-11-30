@@ -7,6 +7,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Loading from "@/app/(dashboard)/_components/loading";
 
+
 const { Option } = Select;
 const fetchPackages = async () => {
   const response = await axios.get(
@@ -127,7 +128,7 @@ const Data = () => {
     setSelectedDuration(duration);
   };
 
-  const filteredPackages = packages?.filter((p) => {
+  const filteredPackages = packages?.filter((p:any) => {
     const durationCondition =
       selectedDuration === "daily"
         ? "1 day"
@@ -325,8 +326,8 @@ const Data = () => {
                 onChange={(value) => handleChange({ name: "dataplan", value })}
               >
                 {packages
-                  .filter((p) => p.operator.trim() === selectedValue.network)
-                  .map((p) => (
+                  .filter((p:any) => p.operator.trim() === selectedValue.network)
+                  .map((p:any) => (
                     <Option key={p.id} value={p.data_options_desc}>
                       {p.data_options_desc}
                     </Option>
