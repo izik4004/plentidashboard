@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { recentTopUp, brandAmount } from "../_constants/customerData";
+import { recentTopUp } from "../_constants/customerData";
 import { mtn, airtel, glo, etisalat } from "@/public/customerImages";
 import usePostRequest from "@/app/hooks/usepostRequest";
 import axios from "axios";
@@ -17,6 +17,12 @@ type AirtimeOperator = {
   amount: number;
   payment_code: string;
   airtime_options_desc: string;
+};
+
+type BrandAmount = {
+  id:number;
+  price: string;
+  points: string;
 };
 const options: NetworkOption[] = [
   { name: "mtn", imgSrc: mtn },
@@ -43,6 +49,9 @@ const Airtime = () => {
   const [amount, setAmount] = useState("");
   const [mobile, setMobile] = useState("");
   const [paymentCode, setPaymentCode] = useState<string>("");
+  const [brandAmounts, setBrandAmounts] = useState<BrandAmount[]>([]);
+  const [selectedBrandAmountId, setSelectedBrandAmountId] = useState<number | null>(null);
+
 
   const url = process.env.NEXT_PUBLIC_BASE_URL;
   const postRequest = usePostRequest();
@@ -51,6 +60,17 @@ const Airtime = () => {
     queryFn: () => fetchAirtimeOperators(),
     queryKey: ["packages"],
   });
+
+  useEffect(() => {
+    if (packages) {
+      const newBrandAmounts = packages.map(packageItem => ({
+        id: packageItem.id,
+        price: packageItem.amount.toString(),
+        points: packageItem.operator.trim()
+      }));
+      setBrandAmounts(newBrandAmounts);
+    }
+  }, [packages]);
 
   const payload = {
     amount: parseInt(amount),
@@ -93,8 +113,13 @@ const Airtime = () => {
     }
   }, [selectedNetwork, amount, packages]);
 
-  const handleAmountClick = (selectedAmount: string) => {
-    setAmount(selectedAmount);
+  const handleAmountClick = (brandAmountId: number) => {
+    const selectedBrandAmount = brandAmounts.find(ba => ba.id === brandAmountId);
+    if (selectedBrandAmount) {
+      setAmount(selectedBrandAmount.price);
+      setSelectedBrandAmountId(brandAmountId); 
+      
+    }
   };
   const selectNetwork = (option: any) => {
     setSelectedNetwork(option);
@@ -165,15 +190,15 @@ const Airtime = () => {
         <section>
           <h2>Select an amount to top up </h2>
           <figure className="grid grid-cols-4">
-            {brandAmount.map((brandAmount, index) => {
-              const isSelected = amount === brandAmount?.price;
+            {brandAmounts.slice(0,8).map((brandAmount, index) => {
+              const isSelected = brandAmount.id === selectedBrandAmountId;
               return (
                 <div
                   className={`bg-[#F8F8F8] rounded-lg m-[1rem] max-md:w-[68px] place-items-center flex items-center justify-center flex-col md:py-[2.5rem] p-[0.5rem] md:p-[1.5rem] cursor-pointer ${
                     isSelected ? "border-2 border-blue-500" : ""
                   }`}
                   key={index}
-                  onClick={() => handleAmountClick(brandAmount.price)}
+                  onClick={() => handleAmountClick(brandAmount.id)}
                 >
                   <h2 className="text-[#626060] font-bold md:text-2xl">
                     {" "}
@@ -181,7 +206,7 @@ const Airtime = () => {
                   </h2>
                   <p className="text-[#ED4249] max-md:text-[10px] font-bold">
                     {" "}
-                    {brandAmount.points} points
+                    {brandAmount.points} 
                   </p>
                 </div>
               );

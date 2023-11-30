@@ -174,7 +174,7 @@ const Data = () => {
     (responseData) => {
       Swal.fire({
         title: "Success!",
-        text: "Data purchase was successful.",
+        text: `Data purchase of ${selectedValue.amount} was successful.`,
         icon: "success",
         showClass: {
           popup: `
