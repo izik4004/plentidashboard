@@ -4,13 +4,33 @@ import { stone_logo, stone_banner } from "@/public/customerImages/index";
 import Tabs from "../../../_components/Tabs";
 import OfferDecription from "../../../_components/OfferDecription";
 import Map from "../../../_components/Map";
+import { useFetchDataPlans } from "@/app/hooks/useFetch";
+import { useParams } from "next/navigation";
 
 const page = () => {
+  const { data } = useFetchDataPlans(
+    "https://admin.plenti.africa/api/v1/user/offers"
+  );
+
+  console.log(data);
+  
+  const { id } = useParams();
+  console.log("route", id);
+
+  const filtered  = data?.find((data:any) => data.code === id)
+
+  console.log(filtered);
+  
+const logitiude = filtered?.store?.longitude
+const latitude = filtered?.store?.latitude
+
+console.log(latitude, logitiude);
+
   return (
     <div>
       <aside className="md:m-[1.5rem]">
         <img
-          src={stone_banner.src}
+          src={filtered?.avatar}
           className="w-full rounded-xl md:h-[280px] h-[210px] object-cover"
           alt=""
         />
@@ -49,7 +69,7 @@ const page = () => {
           </div>
         </div>
         <div>
-          <Map />
+          <Map longitude={logitiude} latitude={latitude}/>
         </div>
         <div>info 3</div>
       </Tabs>

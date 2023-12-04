@@ -2,8 +2,13 @@
 import React, { useEffect } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 
-const Map = () => {
+type MapProps ={
+  longitude: string;
+  latitude: string
+}
+const Map = ({longitude, latitude}: MapProps) => {
   const mapRef = React.useRef<HTMLDivElement | null>(null);
+
 
   useEffect(() => {
     const initMap = async () => {
@@ -18,8 +23,8 @@ const Map = () => {
       )) as google.maps.MarkerLibrary;
 
       const position = {
-        lat: 43.642693,
-        lng: -79.3871189,
+        lat: parseFloat(latitude),
+        lng: parseFloat(longitude),
       };
 
       const mapOptions: google.maps.MapOptions = {
