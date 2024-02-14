@@ -48,7 +48,7 @@ const OrderDetail = () => {
                             <div className="pb-4">
                                 <div className="pt-8">
                                     <div className="flex justify-between py-2">
-                                        <p className="text-[#a8a9a9]">Customer's name:</p>
+                                        <p className="text-[#a8a9a9]">Customer&apos;s name:</p>
                                         <span className="font-semibold">Kanyinsola Balogun</span>
                                     </div>
                                     <div className="flex justify-between py-2">

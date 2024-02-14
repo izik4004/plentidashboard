@@ -25,8 +25,8 @@ const Card = () => {
                     <div className='px-4 border-l-4 border-b-4 border-[#fef5f0] border-dashed mt-4'>
                         <h3 className='font-semibold'>Sign up and get rewarded every time you shop</h3>
                         <p className='py-8'>
-                            If you're new here, sign up for a Plenti Africa account.
-                            If you're an existing user, simply log in to access your
+                            If you&apos;re new here, sign up for a Plenti Africa account.
+                            If you&apos;re an existing user, simply log in to access your
                             account to start earning when you shop at your favorites store.
                         </p>
                     </div>
@@ -58,7 +58,7 @@ const Card = () => {
                         <p className='py-8'>
                             🔍  Dive into our treasure trove of deals, gift cards, and exclusive rewards. Browse through an
                             array of categories, from fashion to electronics, and discover
-                            discounts and cashbacks that'll make your wallet smile.
+                            discounts and cashbacks that&apos;ll make your wallet smile.
                         </p>
                     </div>
                 </div>
@@ -72,7 +72,7 @@ const Card = () => {
                         <h3 className='font-semibold'> Explore our offers, select a deal that suits your needs.</h3>
                         <p className='py-8'>
                             Found a deal or offer that caught your eye?
-                            Click on it to view the details. If you're interested,
+                            Click on it to view the details. If you&apos;re interested,
                             proceed to make payment to claim your reward.
                         </p>
                     </div>
@@ -103,7 +103,7 @@ const Card = () => {
                         <p className='py-8'>
                             🔍  Dive into our treasure trove of deals, gift cards, and exclusive rewards. Browse through an
                             array of categories, from fashion to electronics, and discover
-                            discounts and cashbacks that'll make your wallet smile.
+                            discounts and cashbacks that&apos;ll make your wallet smile.
                         </p>
                     </div>
                 </div>

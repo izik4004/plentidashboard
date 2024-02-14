@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image";
-import { items } from "@/app/(dashboard)/constants/page";
+import { items } from "@/app/(dashboard)/constants/pagey";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";

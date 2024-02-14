@@ -9,7 +9,7 @@ import Link from "next/link";
 import Searchbar from "../_components/Searchbar";
 import { useFetchDataPlans } from "@/app/hooks/useFetch";
 
-const page = () => {
+const Page = () => {
 
 
   const { data } = useFetchDataPlans(
@@ -49,8 +49,8 @@ const page = () => {
         <span className=" font-bold">See all</span>
       </div>
       <div className="flex overflow-x-auto gap-4">
-        {data?.slice(0, 4).map((offer:any) => (
-          <div className="md:w-1/3 ">
+        {data?.slice(0, 4).map((offer:any, index:any) => (
+          <div className="md:w-1/3 " key={index}>
             <OfferCard offer={offer} detailsLink={`/customer/stores/${offer.code}/offers`} />
           </div>
         ))}
@@ -59,4 +59,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

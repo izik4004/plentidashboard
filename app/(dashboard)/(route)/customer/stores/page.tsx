@@ -8,7 +8,7 @@ import { ImLocation } from "react-icons/im";
 import { malls } from "../_constants/customerData";
 import { useFetchDataPlans } from "@/app/hooks/useFetch";
 
-const page = () => {
+const Page = () => {
 
 
   return (
@@ -141,4 +141,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -13,8 +13,6 @@ export interface UserInfo {
     first_name: string;
     last_name: string;
     email: string;
- 
-    // Add other user properties as needed
   };
   // Add other data properties as needed
 }

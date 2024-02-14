@@ -7,7 +7,7 @@ import Map from "../../../_components/Map";
 import { useFetchDataPlans } from "@/app/hooks/useFetch";
 import { useParams } from "next/navigation";
 
-const page = () => {
+const Page = () => {
   const { data } = useFetchDataPlans(
     "https://admin.plenti.africa/api/v1/user/offers"
   );
@@ -77,4 +77,4 @@ console.log(latitude, logitiude);
   );
 };
 
-export default page;
+export default Page;

@@ -21,8 +21,8 @@ const CashbackPromotions: React.FC = () => {
 
       
       <div className="flex overflow-x-auto gap-4">
-          {data?.map((offer:any) => (
-             <div className="md:w-1/3 ">
+          {data?.map((offer:any, index:any) => (
+             <div className="md:w-1/3 " key={index}>
                <OfferCard offer={offer} key={offer.id} detailsLink={`/customer/stores/${offer.code}/offers`} />
              </div>
           ))}

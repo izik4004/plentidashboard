@@ -4,6 +4,7 @@ import { DatePicker } from "antd";
 import usePostRequest from "@/app/hooks/usepostRequest";
 import moment from "moment";
 import Loading from "@/app/(dashboard)/_components/loading";
+import Swal from "sweetalert2";
 
 interface profileProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -11,9 +12,9 @@ interface profileProps {
   mobile: string;
 }
 
-const postRequest = usePostRequest();
 
 const ProfileInfo: React.FC<profileProps> = ({ onSubmit, email, mobile }) => {
+  const postRequest = usePostRequest();
   const url = process.env.NEXT_PUBLIC_BASE_URL;
 
   const DatePickerAny: any = DatePicker;
@@ -38,7 +39,9 @@ const ProfileInfo: React.FC<profileProps> = ({ onSubmit, email, mobile }) => {
   const { mutate, isError, error, isPending } = postRequest(
     `${url}/auth/register`,
     (responseData) => {
+
       onSubmit(responseData);
+      
     },
     (error) => {
       console.error(error);
@@ -51,7 +54,28 @@ const ProfileInfo: React.FC<profileProps> = ({ onSubmit, email, mobile }) => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    mutate(formData);
+    mutate(formData, {
+      onSuccess: (responseData) => {
+        Swal.fire({
+          title: 'Success!',
+          text: 'Profile updated successfully',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        });
+       
+      },
+      onError: (error) => {
+        console.log(error);
+        
+
+        Swal.fire({
+          title: 'Error!',
+          text: error.response.data.message || 'An error occurred',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
+      }
+    });
   };
   return (
     <div className="flex justify-between my-[5rem]">

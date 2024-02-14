@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const page = () => {
+const Page = () => {
     return (
         <div className=' container mx-auto py-10 '>
             <h2 className='font-semibold text-2xl'>Log In</h2>
@@ -20,7 +20,7 @@ const page = () => {
                             <input type="number" id="number" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5  dark:placeholder-gray-400 dark:text-white " placeholder="0000" required />
                         </div>
                     </div>
-                    <small>Don't have an account? <span>Register</span></small>
+                    <small>Don&apos;t have an account? <span>Register</span></small>
 
                     <div className='flex items-center py-6 flex-col'>
                         <Link href="/merchant">
@@ -57,4 +57,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

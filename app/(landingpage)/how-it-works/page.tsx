@@ -3,7 +3,7 @@ import HeroSection from './HeroSection'
 import Section from './Section'
 import Card from './Card'
 
-const page = () => {
+const Page = () => {
   return (
     <div>
       <HeroSection />
@@ -21,4 +21,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

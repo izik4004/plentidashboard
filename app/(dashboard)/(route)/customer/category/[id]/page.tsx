@@ -7,7 +7,7 @@ import "react-tabs/style/react-tabs.css";
 import Promotions from "../../_components/Promotions";
 import Tabs from "../../_components/Tabs";
 
-const page = () => {
+const Page = () => {
   return (
     <div>
       <h2 className="font-bold text-2xl p-[2rem]">Restaurants and Bars</h2>
@@ -57,4 +57,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

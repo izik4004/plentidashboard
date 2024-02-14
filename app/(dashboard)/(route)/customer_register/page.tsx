@@ -6,7 +6,7 @@ import OtpInput from "../customer/_components/Registerflow/OTpinput";
 import ProfileInfo from "../customer/_components/Registerflow/ProfileInfo";
 import Registerform from "../customer/_components/Registerflow/Registerform";
 
-const page = () => {
+const Page = () => {
   const [step, setStep] = useState(1);
   const [registrationResponse, setRegistrationResponse] = useState<any>(null);
   const [email, setEmail] = useState<string>("");
@@ -39,4 +39,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -12,7 +12,7 @@ function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
   event.preventDefault();
 }
 
-const page = () => {
+const Page = () => {
   const openModal = () => {
     const modal = document.getElementById("my_modal_3") as HTMLDialogElement;
     modal.showModal();
@@ -94,4 +94,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

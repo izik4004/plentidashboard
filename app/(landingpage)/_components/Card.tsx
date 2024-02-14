@@ -1,5 +1,6 @@
 import React from 'react'
-import { aboutUs } from "../../constant/index";
+// import { aboutUs } from "../../constant/index";
+import { aboutUs } from '../_constants';
 
 const Card = () => {
     const divData = Array.from({ length: 5 }, (_, index) => index);

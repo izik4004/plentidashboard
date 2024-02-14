@@ -1,5 +1,5 @@
 import StatWidget from "@/components/providers/stat-widget";
-import { invoiceOverviewCardItems, customerTableData } from "../../../constants/page"
+import { invoiceOverviewCardItems, customerTableData } from "../../../constants/pagey"
 import Table from "@/components/providers/table";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, ChevronUp } from "lucide-react"
@@ -71,7 +71,7 @@ const InvoicePage = () => {
             </div>
 
             <div className="py-6">
-                <Table data={data} headers={headers} showAdditionalContent={true} />
+                <Table data={data} headers={headers} showAdditionalContent={true} color="red" extraTableRow={false} />
             </div>
 
         </div>

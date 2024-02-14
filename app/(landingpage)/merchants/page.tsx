@@ -5,7 +5,7 @@ import Faq from '../_components/Faq';
 import {merchantItems} from "../_constants/index"
 
 
-const page = () => {
+const Page = () => {
   const {heroSection, testimony, items} = merchantItems
   return (
     <div className=''>
@@ -25,8 +25,8 @@ const page = () => {
       />
       </div>
       <div className='container mx-auto items-center flex space-x-14 text-center my-6'>
-      {items.map((item) => (
-        <div className='flex flex-col items-center'>
+      {items.map((item, index) => (
+        <div className='flex flex-col items-center'key={index}>
        <Image
           src={item.icon}
           width={50}
@@ -83,4 +83,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

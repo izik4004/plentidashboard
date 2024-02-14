@@ -8,9 +8,11 @@ import Balance from "../customer/_components/Balance";
 import Searchbar from "../customer/_components/Searchbar";
 import Tabs from "../customer/_components/Tabs";
 import useUserInfo from "@/app/hooks/useUserInfo";
+import { useAuth } from "@/app/hooks/useAuth";
 
 export default function CustomerHome() {
   const { userInfo } = useUserInfo();
+  useAuth()
   return (
     <div className="md:p-6">
       <h2 className="md:m-[1.5rem] m-[1rem] text-[#818080]">

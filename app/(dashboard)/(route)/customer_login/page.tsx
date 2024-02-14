@@ -9,12 +9,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 
-const postRequest = usePostRequest();
 
-const page = () => {
+
+const Page = () => {
   const url = process.env.NEXT_PUBLIC_BASE_URL;
   const router = useRouter();
   const { updateUser } = useUserInfo();
+  const postRequest = usePostRequest();
 
   const [formData, setFormData] = useState({
     mobile: "",
@@ -135,4 +136,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

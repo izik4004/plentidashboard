@@ -14,7 +14,7 @@ const MerchantCard = () => {
                 <div className=" py-2">
                     <div className=" px-4">
                         <h2 className="text-gray-800 text-xl font-bold">The palms shopping mall</h2>
-                        <p className="mt-2 text-gray-500 text-sm pb-4">Lorem Ipsum is simpprinting and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </p>
+                        <p className="mt-2 text-gray-500 text-sm pb-4">Lorem Ipsum is simpprinting and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, </p>
                         <a href="" className='text-sm text-gray-500  underline'>View offers available</a>
                     </div>
                  

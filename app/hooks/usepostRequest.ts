@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 

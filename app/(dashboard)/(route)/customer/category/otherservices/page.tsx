@@ -1,6 +1,6 @@
 import React from "react";
 
-const page = () => {
+const Page = () => {
   return (
     <div>
       <div className="text-sm breadcrumbs m-[1rem]">
@@ -13,5 +13,5 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
  
