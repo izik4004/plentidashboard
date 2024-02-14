@@ -6,12 +6,18 @@ import Link from "@mui/material/Link";
 import { deal } from "@/public/customerImages/index";
 import TimerOutlinedIcon from "@mui/icons-material/TimerOutlined";
 import CustomRadio from "../../_components/CustomRadio";
+import Modal from "./Modal";
 
 function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
   event.preventDefault();
 }
 
-const page = () => {
+const Page = () => {
+  const openModal = () => {
+    const modal = document.getElementById("my_modal_3") as HTMLDialogElement;
+    modal.showModal();
+  };
+
   const breadcrumbs = [
     <Link
       underline="hover"
@@ -38,17 +44,19 @@ const page = () => {
 
   return (
     <div className="p-6">
-     <div className="max-md:hidden">
-     <Breadcrumbs
-        separator=">"
-        aria-label="breadcrumb"
-        sx={{ margin: "1rem 0" }}
-      >
-        {breadcrumbs}
-      </Breadcrumbs>
-     </div>
-     <h2 className="md:hidden font-bold text-xl mx-[2rem]">Caim deal</h2>
-      <h2 className="mx-[0.5rem] my-[1rem] md:text-2xl text-xl">Proceed To Checkout </h2>
+      <div className="max-md:hidden">
+        <Breadcrumbs
+          separator=">"
+          aria-label="breadcrumb"
+          sx={{ margin: "1rem 0" }}
+        >
+          {breadcrumbs}
+        </Breadcrumbs>
+      </div>
+      <h2 className="md:hidden font-bold text-xl mx-[2rem]">Caim deal</h2>
+      <h2 className="mx-[0.5rem] my-[1rem] md:text-2xl text-xl">
+        Proceed To Checkout{" "}
+      </h2>
       <div className="md:w-4/5 rounded-lg border-2 flex md:gap-8 gap-3 p-[0.5rem] md:min-h-[151px]">
         <img
           src={deal.src}
@@ -81,12 +89,9 @@ const page = () => {
       {/* custom input */}
 
       <CustomRadio />
-
-      <button className="bg-[#EA1C24] text-[#FFEAEB] rounded-[24px] h-[48px] my-[2rem] block md:w-2/5 w-full px-[3rem] py-[0.5rem]">
-        continue
-      </button>
+      <Modal openModal={openModal}  />
     </div>
   );
 };
 
-export default page;
+export default Page;

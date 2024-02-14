@@ -1,9 +1,12 @@
 import Table from "@/components/providers/table";
-import {orderHistoryTableData} from "../../../constants/page"
+import {orderHistoryTableData} from "../../../constants/pagey"
 import { Button } from "@/components/ui/button";
 
 const OrdersPage = () => {
     const {data, headers, color, searchBy} = orderHistoryTableData
+
+    const tableColor = Array.isArray(color) ? color[0] : color; // Use the first color if it's an array
+
     return (
         <div className="p-6">
             <div className="flex space-x-10 items-center py-4">
@@ -20,7 +23,7 @@ const OrdersPage = () => {
           
             </div>
             <div>
-                <Table data={data} headers={headers} color={color} extraTableRow={true}/>
+                <Table data={data} headers={headers} color={tableColor} extraTableRow={true} showAdditionalContent/>
             </div>
         </div>
 

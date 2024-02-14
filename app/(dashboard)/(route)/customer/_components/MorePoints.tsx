@@ -16,13 +16,11 @@ const MorePoints1: () => React.JSX.Element = () => {
             backgroundColor: background,
             color: color,
           };
-
           return (
             <Link href={link}  key={index}>
               <div
                 className="h-[140px] w-[140px]  flex items-center justify-center flex-col  rounded-lg"
                 style={divStyle}
-               
               >
                 <img src={img.src} alt="" />
                 {text}

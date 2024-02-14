@@ -5,7 +5,7 @@ import { FaqLinks, contact } from "../_constants/index";
 import Link from "next/link";
 import Image from "next/image";
 
-const page = () => {
+const Page = () => {
   return (
     <div className=''>
       <HeroSection />
@@ -33,8 +33,8 @@ const page = () => {
       </div>
       <div className='container mx-auto my-6 px-4 md:px-0 '>
         <div className='flex md:flex-row gap-4 lg:gap-0 lg:space-x-6 flex-col'>
-          {contact.items.map((item) => (
-            <div className='flex p-4 border rounded-md flex-col '>
+          {contact.items.map((item, index) => (
+            <div className='flex p-4 border rounded-md flex-col ' key={index}>
               <Image
                 src={item.icon}
                 width={50}
@@ -53,4 +53,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

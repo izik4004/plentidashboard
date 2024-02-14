@@ -1,5 +1,5 @@
 import StatWidget from "@/components/providers/stat-widget";
-import { singleOverviewCardItems, customerTableData } from "../../../constants/page"
+import { singleOverviewCardItems, customerTableData } from "../../../constants/pagey"
 import Table from "@/components/providers/table";
 import { PieChartss } from "@/components/providers/pie-chart";
 import { Info } from "lucide-react"
@@ -34,7 +34,7 @@ const CustomersPage = () => {
                             />
                         ))}
                     </div>
-                    <Table data={data} headers={headers} showAdditionalContent={true} extraTableRow={false}/>
+                    <Table color="" data={data} headers={headers} showAdditionalContent={true} extraTableRow={false}/>
                 </div>
                 <div className="w-1/4 py-6 ">
                     <div className="shadow-lg p-6 flex flex-col">

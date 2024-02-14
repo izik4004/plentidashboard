@@ -8,6 +8,7 @@ import Promotions from "./_components/Promotions";
 import "../../globals.css";
 import { ReactQueryProvider } from "@/app/ReactQueryprovider";
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <ReactQueryProvider>
       <html lang="en" className="font-family-raleway">

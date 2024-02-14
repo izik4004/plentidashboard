@@ -7,10 +7,18 @@ import { offerCard } from "../_constants/customerData";
 import OfferCard from "../_components/Offers";
 import Link from "next/link";
 import Searchbar from "../_components/Searchbar";
+import { useFetchDataPlans } from "@/app/hooks/useFetch";
 
-const page = () => {
+const Page = () => {
+
+
+  const { data } = useFetchDataPlans(
+    "https://admin.plenti.africa/api/v1/user/offers"
+  );
+
+  console.log("data", data);
   return (
-    <div className="p-6">
+    <div className="md:p-6">
       <h2 className="py-[1rem] text-2xl text-[#424040] capitalize font-bold">
         category
       </h2>
@@ -41,9 +49,9 @@ const page = () => {
         <span className=" font-bold">See all</span>
       </div>
       <div className="flex overflow-x-auto gap-4">
-        {offerCard.slice(0, 4).map((offer) => (
-          <div className="md:w-1/3 ">
-            <OfferCard offer={offer} detailsLink={`/customer/category/offers`} />
+        {data?.slice(0, 4).map((offer:any, index:any) => (
+          <div className="md:w-1/3 " key={index}>
+            <OfferCard offer={offer} detailsLink={`/customer/stores/${offer.code}/offers`} />
           </div>
         ))}
       </div>
@@ -51,4 +59,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

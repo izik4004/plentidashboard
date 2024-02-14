@@ -4,7 +4,7 @@ import { mall, mallimage } from "@/public/customerImages/index";
 import Deals from "../../_components/Deals";
 import { dealCard } from "../../_constants/customerData";
 
-const page = () => {
+const Page = () => {
   return (
     <div className="overflow-x-hidden">
       <div className="md:w-[420px] md:m-[2rem] my-[2rem]">
@@ -33,9 +33,9 @@ const page = () => {
       </section>
 
       <div className="md:flex overflow-x-auto white-space-nowrap gap-8 my-[2rem]">
-        {dealCard.map((deal) => {
+        {dealCard.map((deal, index) => {
           return (
-            <div className="md:w-[340px] w-full flex-shrink-0">
+            <div className="md:w-[340px] w-full flex-shrink-0" key={index}>
             <Deals offer={deal} key={deal.id} detailsLink={`/customer/stores/${deal.id + deal.percentCashback}/offers`} />
             </div>
           );
@@ -45,4 +45,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -50,10 +50,11 @@ const ProductFilter = () =>  {
         <ul>
           {products
             .filter((product) => !selectedCategory || product.category === selectedCategory)
-            .map((product) => (
+            .map((product, index) => (
           
               <DealsCard
-              imageSrc={product.Image}
+              key={index}
+              imageSrc={product.Image as any}
               text={product.text}
               amount={product.amount}
               link={product.link}

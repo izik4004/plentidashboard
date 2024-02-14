@@ -4,7 +4,7 @@ import Airtime from "../../../_components/Airtime";
 import Data from "../../../_components/Data";
 import Tabs from "../../../_components/Tabs";
 
-const page = () => {
+const Page = () => {
   return (
     <div>
       <div className="text-sm breadcrumbs m-[1rem]">
@@ -29,4 +29,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

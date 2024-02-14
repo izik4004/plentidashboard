@@ -7,12 +7,16 @@ import "react-tabs/style/react-tabs.css";
 import Balance from "../customer/_components/Balance";
 import Searchbar from "../customer/_components/Searchbar";
 import Tabs from "../customer/_components/Tabs";
+import useUserInfo from "@/app/hooks/useUserInfo";
+import { useAuth } from "@/app/hooks/useAuth";
 
 export default function CustomerHome() {
+  const { userInfo } = useUserInfo();
+  useAuth()
   return (
-    <div className="p-6">
+    <div className="md:p-6">
       <h2 className="md:m-[1.5rem] m-[1rem] text-[#818080]">
-        Good Day ,<span className="font-bold text-black"> Romeoscript</span>
+        Good Day ,{userInfo &&<span className="font-bold text-black"> {userInfo.username}</span>}
         <Searchbar />
       </h2>
 

@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { TimerReset, ChevronRight } from "lucide-react"
 import StatWidget from "@/components/providers/stat-widget";
-import { singleOverviewCardItems } from "../../../../constants/page"
+import { singleOverviewCardItems } from "../../../../constants/pagey"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Link from "next/link";
 

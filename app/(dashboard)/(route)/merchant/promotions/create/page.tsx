@@ -35,7 +35,7 @@ const CreatePromotion = () => {
             <form className='py-4'>
                 <div className='flex gap-6 flex-wrap'>
                     {formField.map((item, index) => (
-                        <div className='flex flex-col w-1/3'>
+                        <div className='flex flex-col w-1/3' key={index}>
                             <Label htmlFor="email" className='py-4'>{item.label}</Label>
                             <Input placeholder={item.placeholder} />
                         </div>

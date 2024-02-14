@@ -39,7 +39,7 @@ const OrderTable = () => {
                                     <div
                                         className="flex  items-center justify-between pb-2 pt-4 text-start uppercase tracking-wide text-gray-600 sm:text-xs lg:text-xs"
                                     >
-                                        Customer's Details
+                                     Customer&apos;s Details
                                     </div>
                                 </th>
                                 <th >

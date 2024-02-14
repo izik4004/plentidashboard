@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { googleicon, appleicon, loginimg } from "@/public/customerImages";
 
-
 import usePostRequest from "@/app/hooks/usepostRequest";
+import Loading from "@/app/(dashboard)/_components/loading";
+
 
 interface RegisterformProps {
-  onSubmit: (responseData: any, email:string, mobile:string) => void;
+  onSubmit: (responseData: any, email: string, mobile: string) => void;
 }
 
 const Registerform: React.FC<RegisterformProps> = ({ onSubmit }) => {
@@ -16,26 +17,32 @@ const Registerform: React.FC<RegisterformProps> = ({ onSubmit }) => {
     code: "",
     email: "",
   });
+
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-  const postRequest = usePostRequest();
 
-  const { mutate, isError, error,isPending} = postRequest(
+    let formattedValue = value;
+    if (name === 'mobile') {
+      if (value.startsWith('0')) {
+        formattedValue = '+234' + value.substring(1);
+      } else if (!value.startsWith('+234')) {
+        formattedValue = value;
+      }
+    }
+
+    setFormData((prev) => ({ ...prev, [name]: formattedValue }));
+  };
+
+  const postRequest = usePostRequest();
+  const { mutate, isError, error, isPending } = postRequest(
     `${url}/auth/verify-mobile-number`,
     (responseData) => {
-      onSubmit(responseData,formData.email,formData.mobile)
-      console.log(responseData);
-      
+      onSubmit(responseData, formData.email, formData.mobile);
     },
     (error) => {
       console.error(error);
     }
   );
-
-
-  
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -43,7 +50,12 @@ const Registerform: React.FC<RegisterformProps> = ({ onSubmit }) => {
   };
   return (
     <div className="flex justify-between my-[5rem]">
-      <form action="" className="md:ml-[4rem] md:basis-[45%]" onSubmit={handleSubmit}>
+      {isPending && <Loading />}
+      <form
+        action=""
+        className="md:ml-[4rem] md:basis-[45%]"
+        onSubmit={handleSubmit}
+      >
         <h2 className="text-2xl">Create your Plenti accont</h2>
         <p className="text-gray-600 my-[1rem]">
           Earn cashback and points when you shop at your favorite store.

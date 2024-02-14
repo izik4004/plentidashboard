@@ -27,7 +27,9 @@ body {
 }
 
 
-
+.ant-select-selector{
+  background:#f3f3f3!important;
+}
 .height-minus-80 {
   height: calc(100vh - 80px);
 }

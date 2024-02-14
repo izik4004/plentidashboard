@@ -5,9 +5,9 @@ import Link from "next/link";
 
 interface Offer {
   id: number;
-  img: { src: string };
-  offer: string;
-  endDate: string; // Should be in the format "YYYY-MM-DD"
+  avatar: string;
+  name: string;
+  date_to: string; 
   percentCashback: string;
 }
 
@@ -25,7 +25,7 @@ const OfferCard: React.FC<OfferProps> = ({ offer, detailsLink }) => {
   useEffect(() => {
     const calculateRemainingDays = () => {
       const currentDate = new Date();
-      const endDate = new Date(offer.endDate);
+      const endDate = new Date(offer.date_to);
       const timeDifference = endDate.getTime() - currentDate.getTime();
       const days = Math.max(
         Math.ceil(timeDifference / (1000 * 60 * 60 * 24)),
@@ -35,13 +35,13 @@ const OfferCard: React.FC<OfferProps> = ({ offer, detailsLink }) => {
     };
 
     calculateRemainingDays();
-  }, [offer.endDate]);
+  }, [offer.date_to]);
 
   return (
     <aside className="rounded-md shadow-md md:p-[1rem] p-[0.5rem] md:w-[260px] xl:my-[2rem]  w-[170px]">
       <div className="relative">
         <img
-          src={offer.img.src}
+          src={offer.avatar}
           alt=""
           className="w-full h-[143px]  object-cover rounded-md"
         />
@@ -51,9 +51,9 @@ const OfferCard: React.FC<OfferProps> = ({ offer, detailsLink }) => {
         </figure>
       </div>
       <span className="bg-[#FFF5F5] text-[#EA1C24] my-[1rem] inline-block rounded-md p-[0.5rem] md:text-[12px] text-[10px] w-auto">
-        <TimerOutlinedIcon /> <span>{offer.percentCashback}</span>
+        <TimerOutlinedIcon /> <span>{offer.percentCashback} offer available in all branches</span>
       </span>
-      <p className="text-[#818080]  max-md:text-sm my-[1rem]">{offer.offer}</p>
+      <p className="text-[#818080]  max-md:text-sm my-[1rem]">{offer.name}</p>
       <Link href={detailsLink}>
         <p className="underline"> view details</p>
       </Link>

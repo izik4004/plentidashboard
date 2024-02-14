@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation"; // Assuming the correct import for useRouter
 import { choose_brand } from "../../_constants/customerData";
+import Swal from "sweetalert2";
 
 const Brands = () => {
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
@@ -17,8 +18,24 @@ const Brands = () => {
   };
 
   const handleSubmit = () => {
-    console.log("Selected Brands: ", selectedBrands);
-    router.push("/customer");
+    if (selectedBrands.length === 0) {
+      Swal.fire({
+        title: 'No Brands Selected',
+        text: 'Please select at least one brand to continue.',
+        icon: 'warning',
+        confirmButtonText: 'Ok'
+      });
+    } else {
+      console.log("Selected Brands: ", selectedBrands);
+      Swal.fire({
+        title: 'Success!',
+        text: 'Brands selected successfully.',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      }).then(() => {
+        router.push("/customer_login");
+      });
+    }
   };
 
   return (

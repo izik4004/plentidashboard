@@ -2,7 +2,7 @@ import Table from "@/components/providers/table";
 import OrderTable from "@/components/providers/order-table";
 import { StatOverview } from "@/components/providers/stat-overview";
 import StatWidget from "@/components/providers/stat-widget";
-import { storeOverviewTableData, overviewCardItems } from "../../constants/page"
+import { storeOverviewTableData, overviewCardItems } from "../../constants/pagey"
 // import { UserButton } from "@clerk/nextjs";
 
 export default function Home() {
@@ -45,7 +45,7 @@ export default function Home() {
             See all
           </button>
         </div>
-        <Table data={data} headers={headers} extraTableRow={true}/>
+        <Table data={data} headers={headers} extraTableRow={true} showAdditionalContent color=""/>
       </div>
 
     </div>

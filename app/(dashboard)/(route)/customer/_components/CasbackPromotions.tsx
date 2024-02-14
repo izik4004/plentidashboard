@@ -3,8 +3,13 @@ import { promotionlady } from "@/public/customerImages/index";
 import { offerCard as offerData } from "../../customer/_constants/customerData";
 import MorePoints from "../_components/MorePoints";
 import OfferCard from "./Offers"; // Replace with the correct path to the OfferCard component
+import { useFetchDataPlans } from "@/app/hooks/useFetch";
 
 const CashbackPromotions: React.FC = () => {
+
+  const { data } = useFetchDataPlans(
+    "https://admin.plenti.africa/api/v1/user/offers"
+  );
   return (
     <>
       <div className="my-[1.5rem]">
@@ -16,9 +21,9 @@ const CashbackPromotions: React.FC = () => {
 
       
       <div className="flex overflow-x-auto gap-4">
-          {offerData.map((offer) => (
-             <div className="md:w-1/3 ">
-               <OfferCard offer={offer} key={offer.id} detailsLink={`/customer/hhhh`} />
+          {data?.map((offer:any, index:any) => (
+             <div className="md:w-1/3 " key={index}>
+               <OfferCard offer={offer} key={offer.id} detailsLink={`/customer/stores/${offer.code}/offers`} />
              </div>
           ))}
         </div>

@@ -3,7 +3,7 @@ import Image from 'next/image'
 import React from 'react'
 
 
-const page = () => {
+const Page = () => {
     return (
         <div className=' container mx-auto py-10 '>
             <h2 className='font-semibold text-2xl'>Create your Plenti Account</h2>
@@ -57,4 +57,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

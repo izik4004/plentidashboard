@@ -6,7 +6,7 @@ import OtpInput from "../customer/_components/Registerflow/OTpinput";
 import ProfileInfo from "../customer/_components/Registerflow/ProfileInfo";
 import Registerform from "../customer/_components/Registerflow/Registerform";
 
-const page = () => {
+const Page = () => {
   const [step, setStep] = useState(1);
   const [registrationResponse, setRegistrationResponse] = useState<any>(null);
   const [email, setEmail] = useState<string>("");
@@ -31,12 +31,12 @@ const page = () => {
 
   return (
     <div>
-      {step === 3 && <Registerform onSubmit={handleRegisterSubmit} />}
+      {step === 1 && <Registerform onSubmit={handleRegisterSubmit} />}
       {step === 2 && <OtpInput registrationData={registrationResponse} onOtpSubmit={handleOtpSubmit} />}
-      {step === 1 && <ProfileInfo onSubmit={handleProfileSubmit} mobile={mobile} email={email} />}
+      {step === 3 && <ProfileInfo onSubmit={handleProfileSubmit} mobile={mobile} email={email} />}
       {step === 4 && <Brands />}
     </div>
   );
 };
 
-export default page;
+export default Page;
